@@ -21,6 +21,11 @@ import Account from "./pages/Account";
 import Philosophy from "./pages/Philosophy";
 import BulkUpload from "./pages/BulkUpload";
 import AdminOrders from "./pages/AdminOrders";
+import Tracking from "./pages/Tracking";
+import Shipping from "./pages/Shipping";
+import Returns from "./pages/Returns";
+import Consultation from "./pages/Consultation";
+import { RequireAdmin } from "./components/RequireAdmin";
 
 const queryClient = new QueryClient();
 
@@ -46,8 +51,26 @@ const App = () => (
             <Route path="/auth" element={<Auth />} />
             <Route path="/account" element={<Account />} />
             <Route path="/philosophy" element={<Philosophy />} />
-            <Route path="/admin/bulk-upload" element={<BulkUpload />} />
-            <Route path="/admin/orders" element={<AdminOrders />} />
+            <Route path="/tracking" element={<Tracking />} />
+            <Route path="/shipping" element={<Shipping />} />
+            <Route path="/returns" element={<Returns />} />
+            <Route path="/consultation" element={<Consultation />} />
+            <Route
+              path="/admin/bulk-upload"
+              element={
+                <RequireAdmin>
+                  <BulkUpload />
+                </RequireAdmin>
+              }
+            />
+            <Route
+              path="/admin/orders"
+              element={
+                <RequireAdmin>
+                  <AdminOrders />
+                </RequireAdmin>
+              }
+            />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
