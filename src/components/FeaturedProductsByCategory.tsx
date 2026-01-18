@@ -49,7 +49,7 @@ const FeaturedProductsCategory = ({ categorySlug, limit = 4 }: FeaturedProductsB
     };
 
     loadProducts();
-  }, [categorySlug, limit, categoryInfo]);
+  }, [categorySlug, limit]);
 
   if (!categoryInfo) return null;
 
