@@ -4,7 +4,8 @@ Last Updated: January 18, 2026
 
 ## Overview
 
-This document tracks the security status of the Asper Beauty Shop application, including vulnerability assessments and mitigation strategies.
+This document tracks the security status of the Asper Beauty Shop application,
+including vulnerability assessments and mitigation strategies.
 
 ## Security Audit Results
 
@@ -48,7 +49,7 @@ The following vulnerabilities remain but have been assessed for impact:
    - Status: ⚠️ Not Fixed (Would require breaking change)
    - CVE: GHSA-67mh-4wv8-2f99
    - Impact: Development-only issue
-   - Mitigation: 
+   - Mitigation:
      - Only affects development server, not production build
      - Development server should never be exposed to public internet
      - Fix available in vite 7.x (breaking change)
@@ -58,7 +59,7 @@ The following vulnerabilities remain but have been assessed for impact:
 2. **SheetJS (xlsx) Vulnerabilities (HIGH)**
    - Package: `xlsx`
    - Status: ⚠️ No Fix Available
-   - CVEs: 
+   - CVEs:
      - GHSA-4r6h-8v6p-xvw6 (Prototype Pollution)
      - GHSA-5pgg-2g8v-p4x9 (Regular Expression DoS)
    - Usage: `/admin/bulk-upload` page only
@@ -77,17 +78,20 @@ The following vulnerabilities remain but have been assessed for impact:
 ## Security Best Practices Implemented
 
 ### Authentication & Authorization
+
 - ✅ Admin routes protected with `RequireAdmin` component
 - ✅ Supabase Row Level Security (RLS) enabled
 - ✅ Secure session management via Supabase Auth
 
 ### Data Protection
+
 - ✅ Environment variables for sensitive configuration
 - ✅ HTTPS enforced for API communications
 - ✅ Input validation on forms (COD checkout, bulk upload)
 - ✅ XSS protection via React's built-in escaping
 
 ### API Security
+
 - ✅ Shopify Storefront API with limited permissions
 - ✅ Supabase API with RLS policies
 - ✅ Rate limiting handled by service providers
@@ -95,9 +99,11 @@ The following vulnerabilities remain but have been assessed for impact:
 ## Recommendations
 
 ### Immediate Actions (None Required)
+
 All high-priority vulnerabilities have been addressed.
 
 ### Short-term Actions (Next 1-3 months)
+
 1. **Plan vite 7.x upgrade**
    - Research breaking changes
    - Test in development environment
@@ -109,6 +115,7 @@ All high-priority vulnerabilities have been addressed.
    - Consider CSV-only alternative for simplicity
 
 ### Long-term Actions (Next 3-6 months)
+
 1. **Implement automated security scanning**
    - Add Dependabot or Renovate for automated updates
    - Schedule regular `npm audit` reviews
@@ -130,18 +137,21 @@ All high-priority vulnerabilities have been addressed.
 ### For Developers
 
 **Before Adding New Dependencies:**
+
 1. Check package for known vulnerabilities: `npm audit`
 2. Review package maintenance status (last update, open issues)
 3. Prefer well-maintained, popular packages
 4. Document security considerations for admin-facing features
 
 **Before Deploying:**
+
 1. Run `npm audit` to check for new vulnerabilities
 2. Review and address any HIGH severity issues
 3. Build and test production bundle
 4. Verify no sensitive data in logs or error messages
 
 **For Admin Features:**
+
 1. Always protect with authentication
 2. Validate all user inputs
 3. Limit file upload sizes
@@ -151,11 +161,13 @@ All high-priority vulnerabilities have been addressed.
 ## Testing & Verification
 
 ### Build Status
+
 - ✅ Production build successful
 - ✅ No build errors
 - ✅ All assets optimized
 
 ### Security Checks Performed
+
 - ✅ npm audit run and reviewed
 - ✅ Vulnerable packages updated where possible
 - ✅ Remaining vulnerabilities assessed and documented
@@ -165,19 +177,21 @@ All high-priority vulnerabilities have been addressed.
 ## Contact
 
 For security concerns or to report vulnerabilities:
+
 - Create a private security advisory on GitHub
 - Or contact: [Your security contact email]
 
 ## Version History
 
-| Date | Version | Changes |
-|------|---------|---------|
-| 2026-01-18 | 1.0 | Initial security audit and documentation |
-| 2026-01-18 | 1.1 | Fixed 5 critical vulnerabilities, documented remaining issues |
+| Date       | Version | Changes                                                       |
+| ---------- | ------- | ------------------------------------------------------------- |
+| 2026-01-18 | 1.0     | Initial security audit and documentation                      |
+| 2026-01-18 | 1.1     | Fixed 5 critical vulnerabilities, documented remaining issues |
 
 ---
 
 **Note**: This is a living document. Update it whenever:
+
 - Security vulnerabilities are fixed
 - New vulnerabilities are discovered
 - Security practices change
