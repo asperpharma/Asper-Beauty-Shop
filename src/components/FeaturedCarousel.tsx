@@ -137,31 +137,28 @@ export const FeaturedCarousel = () => {
                 >
                   {/* Product Image */}
                   <div className="relative aspect-square bg-white rounded-lg overflow-hidden mb-4 shadow-sm">
-                    {imageUrl
-                      ? (
-                        <OptimizedImage
-                          src={imageUrl}
-                          alt={displayTitle}
-                          className="w-full h-full object-contain p-4 transition-transform duration-500 group-hover:scale-105"
-                          loading="lazy"
-                          width={400}
-                          height={400}
-                          sizes="(max-width: 768px) 256px, 288px"
-                        />
-                      )
-                      : (
-                        <ProductImagePlaceholder
-                          title={displayTitle}
-                          brand={(product.node as any).vendor ||
-                            displayTitle.split(" ")[0]}
-                          category={categorizeProduct(
-                            product.node.title,
-                            product.node.productType,
-                            product.node.vendor,
-                          )}
-                          className="w-full h-full"
-                        />
-                      )}
+                    {imageUrl ? (
+                      <OptimizedImage
+                        src={imageUrl}
+                        alt={displayTitle}
+                        className="w-full h-full object-contain p-4 transition-transform duration-500 group-hover:scale-105"
+                        loading="lazy"
+                        width={400}
+                        height={400}
+                        sizes="(max-width: 768px) 256px, 288px"
+                      />
+                    ) : (
+                      <ProductImagePlaceholder
+                        title={displayTitle}
+                        brand={product.node.vendor || displayTitle.split(" ")[0]}
+                        category={categorizeProduct(
+                          product.node.title,
+                          product.node.productType,
+                          product.node.vendor,
+                        )}
+                        className="w-full h-full"
+                      />
+                    )}
 
                     {/* Quick Add Button - Shows on Hover */}
                     <div className="absolute inset-x-0 bottom-0 p-4 opacity-0 transform translate-y-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">

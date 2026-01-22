@@ -148,7 +148,7 @@ export const CODCheckoutForm = (
 
       clearCart();
       onSuccess(data.order_number);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Failed to place COD order:", error);
 
       // Provide more specific error messages
@@ -156,22 +156,23 @@ export const CODCheckoutForm = (
         ? "فشل في إرسال الطلب. حاول مرة أخرى."
         : "Failed to place order. Please try again.";
 
-      if (error?.message) {
+      const message = error instanceof Error ? error.message : "";
+      if (message) {
         if (
-          error.message.includes("duplicate") ||
-          error.message.includes("unique")
+          message.includes("duplicate") ||
+          message.includes("unique")
         ) {
           errorMessage = isArabic
             ? "حدث خطأ. يرجى المحاولة مرة أخرى."
             : "An error occurred. Please try again.";
         } else if (
-          error.message.includes("RLS") || error.message.includes("permission")
+          message.includes("RLS") || message.includes("permission")
         ) {
           errorMessage = isArabic
             ? "خطأ في الصلاحيات. يرجى التحقق من الإعدادات."
             : "Permission error. Please check settings.";
         } else {
-          errorMessage = error.message;
+          errorMessage = message;
         }
       }
 

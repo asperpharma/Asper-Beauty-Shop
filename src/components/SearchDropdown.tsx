@@ -142,27 +142,24 @@ export const SearchDropdown = ({
                     >
                       {/* Product Image */}
                       <div className="w-14 h-14 flex-shrink-0 bg-gray-100 rounded-lg overflow-hidden">
-                        {imageUrl
-                          ? (
-                            <img
-                              src={imageUrl}
-                              alt={displayTitle}
-                              className="w-full h-full object-cover"
-                            />
-                          )
-                          : (
-                            <ProductImagePlaceholder
-                              title={displayTitle}
-                              brand={(product.node as any).vendor ||
-                                displayTitle.split(" ")[0]}
-                              category={categorizeProduct(
-                                product.node.title,
-                                product.node.productType,
-                                product.node.vendor,
-                              )}
-                              className="w-full h-full rounded-lg"
-                            />
-                          )}
+                        {imageUrl ? (
+                          <img
+                            src={imageUrl}
+                            alt={displayTitle}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <ProductImagePlaceholder
+                            title={displayTitle}
+                            brand={product.node.vendor || displayTitle.split(" ")[0]}
+                            category={categorizeProduct(
+                              product.node.title,
+                              product.node.productType,
+                              product.node.vendor,
+                            )}
+                            className="w-full h-full rounded-lg"
+                          />
+                        )}
                       </div>
 
                       {/* Product Info */}

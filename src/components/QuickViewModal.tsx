@@ -91,68 +91,62 @@ export const QuickViewModal = (
         <div className="grid md:grid-cols-2 gap-0">
           {/* Image Gallery */}
           <div className="relative bg-gradient-to-br from-cream to-cream/80 aspect-square md:aspect-auto md:h-full">
-            {images.length > 0
-              ? (
-                <>
-                  <img
-                    src={images[currentImageIndex]?.node.url}
-                    alt={images[currentImageIndex]?.node.altText || node.title}
-                    className="w-full h-full object-cover"
-                  />
-
-                  {/* Image Navigation */}
-                  {images.length > 1 && (
-                    <>
-                      <button
-                        onClick={prevImage}
-                        className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-cream/90 backdrop-blur-sm border border-gold/30 flex items-center justify-center hover:bg-gold hover:text-cream transition-colors shadow-lg"
-                      >
-                        <ChevronLeft className="w-5 h-5" />
-                      </button>
-                      <button
-                        onClick={nextImage}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-cream/90 backdrop-blur-sm border border-gold/30 flex items-center justify-center hover:bg-gold hover:text-cream transition-colors shadow-lg"
-                      >
-                        <ChevronRight className="w-5 h-5" />
-                      </button>
-
-                      {/* Dots */}
-                      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-                        {images.map((_, index) => (
-                          <button
-                            key={index}
-                            onClick={() => setCurrentImageIndex(index)}
-                            className={`w-2 h-2 rounded-full transition-all ${
-                              index === currentImageIndex
-                                ? "bg-gold w-6"
-                                : "bg-foreground/30 hover:bg-foreground/50"
-                            }`}
-                          />
-                        ))}
-                      </div>
-                    </>
-                  )}
-
-                  {/* Sale Badge */}
-                  {isOnSale && (
-                    <div className="absolute top-4 left-4 bg-gradient-to-r from-red-600 to-red-500 text-cream px-3 py-1.5 font-display text-xs tracking-widest uppercase shadow-lg">
-                      -{discountPercent}% OFF
-                    </div>
-                  )}
-                </>
-              )
-              : (
-                <ProductImagePlaceholder
-                  title={node.title}
-                  brand={(node as any).vendor || node.title.split(" ")[0]}
-                  category={categorizeProduct(
-                    node.title,
-                    node.productType,
-                    node.vendor,
-                  )}
-                  className="w-full h-full"
+            {images.length > 0 ? (
+              <>
+                <img
+                  src={images[currentImageIndex]?.node.url}
+                  alt={images[currentImageIndex]?.node.altText || node.title}
+                  className="w-full h-full object-cover"
                 />
-              )}
+                
+                {/* Image Navigation */}
+                {images.length > 1 && (
+                  <>
+                    <button
+                      onClick={prevImage}
+                      className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-cream/90 backdrop-blur-sm border border-gold/30 flex items-center justify-center hover:bg-gold hover:text-cream transition-colors shadow-lg"
+                    >
+                      <ChevronLeft className="w-5 h-5" />
+                    </button>
+                    <button
+                      onClick={nextImage}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-cream/90 backdrop-blur-sm border border-gold/30 flex items-center justify-center hover:bg-gold hover:text-cream transition-colors shadow-lg"
+                    >
+                      <ChevronRight className="w-5 h-5" />
+                    </button>
+                    
+                    {/* Dots */}
+                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                      {images.map((_, index) => (
+                        <button
+                          key={index}
+                          onClick={() => setCurrentImageIndex(index)}
+                          className={`w-2 h-2 rounded-full transition-all ${
+                            index === currentImageIndex 
+                              ? 'bg-gold w-6' 
+                              : 'bg-foreground/30 hover:bg-foreground/50'
+                          }`}
+                        />
+                      ))}
+                    </div>
+                  </>
+                )}
+                
+                {/* Sale Badge */}
+                {isOnSale && (
+                  <div className="absolute top-4 left-4 bg-gradient-to-r from-red-600 to-red-500 text-cream px-3 py-1.5 font-display text-xs tracking-widest uppercase shadow-lg">
+                    -{discountPercent}% OFF
+                  </div>
+                )}
+              </>
+            ) : (
+              <ProductImagePlaceholder
+                title={node.title}
+                brand={(node as any).vendor || node.title.split(' ')[0]}
+                category={categorizeProduct(node.title, node.productType, node.vendor)}
+                className="w-full h-full"
+              />
+            )}
           </div>
 
           {/* Product Details */}
