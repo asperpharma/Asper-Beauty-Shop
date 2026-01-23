@@ -1,134 +1,158 @@
-# Asper Beauty Shop
+# 🌟 Asper Beauty Shop
 
-A luxury e-commerce storefront for premium skincare and beauty products, built with modern web technologies.
+> **Premium Beauty E-commerce Platform** - Luxury skincare and beauty essentials for the modern customer
 
-🔗 **Live Site**: [asperbeauty.lovable.app](https://asperbeautyshop.lovable.app)
+🔗 **Live**: [www.asperbeautyshop.com](https://www.asperbeautyshop.com)  
+🔗 **Dev**: [asperbeautyshop.lovable.app](https://asperbeautyshop.lovable.app)
+
+---
+
+## 🚀 Quick Start
+
+```bash
+npm install          # Install dependencies
+npm run dev         # Start dev server (localhost:8080)
+npm run build       # Build for production
+npm run preview     # Preview production build
+```
+
+---
 
 ## ✨ Features
 
-- **Product Catalog** - Browse products by brand, category, and skin concerns
-- **Shopping Cart** - Add products with real-time cart updates
-- **Wishlist** - Save favorite products for later
-- **Quick View** - Preview product details without leaving the page
-- **Search** - Find products by name, brand, or category
-- **Responsive Design** - Optimized for desktop, tablet, and mobile
-- **RTL Support** - Full Arabic language support with right-to-left layout
-- **Shopify Integration** - Connected to Shopify for product management and checkout
+- 🛍️ **Shopify Integration** - Full e-commerce with checkout
+- 🌐 **Bilingual** - English & Arabic (RTL support)
+- 🤖 **AI Beauty Assistant** - Powered by Gemini 2.5 Flash
+- 📱 **9 Social Platforms** - Instagram, Facebook, TikTok, WhatsApp, X, YouTube, LinkedIn, Snapchat, Pinterest
+- 🎨 **Luxury Design** - Responsive, animated, PWA-ready
+- 💾 **Smart Cart** - Persistent shopping with Zustand
+
+---
 
 ## 🛠️ Tech Stack
 
-- **Framework**: React 18 with TypeScript
-- **Build Tool**: Vite
-- **Styling**: Tailwind CSS
-- **UI Components**: shadcn/ui (Radix UI primitives)
-- **State Management**: Zustand
-- **Routing**: React Router v6
-- **Data Fetching**: TanStack Query
-- **E-commerce**: Shopify Storefront API
-- **Animations**: CSS animations with Tailwind
+**Frontend**: React 18, TypeScript, Vite, Tailwind CSS, shadcn/ui  
+**State**: Zustand, React Router v6  
+**Backend**: Supabase (auth, serverless functions)  
+**E-commerce**: Shopify Storefront API v2025-07  
+**Deployment**: Lovable Platform  
 
-## 🎨 Design System
-
-The project uses a custom design system with:
-
-| Token | Color | Usage |
-|-------|-------|-------|
-| `--maroon` | `#800020` | Primary brand color |
-| `--soft-ivory` | `#F8F8FF` | Background |
-| `--shiny-gold` | `#C5A028` | Accent color |
-| `--dark-charcoal` | `#333333` | Text color |
-
-Typography:
-- **Display**: Playfair Display (headings)
-- **Body**: Montserrat (body text)
-- **RTL**: Tajawal (Arabic text)
+---
 
 ## 📁 Project Structure
 
 ```
 src/
-├── assets/           # Images and static assets
-├── components/       # Reusable UI components
-│   └── ui/          # shadcn/ui components
-├── contexts/        # React context providers
-├── hooks/           # Custom React hooks
-├── lib/             # Utility functions
-├── pages/           # Route pages
-└── stores/          # Zustand state stores
+├── components/     # UI components (Header, Footer, ProductCard, etc.)
+│   └── ui/        # shadcn/ui primitives
+├── pages/         # Routes (Index, ProductDetail, Collections, etc.)
+├── stores/        # Zustand (cart, wishlist)
+├── contexts/      # Language context (EN/AR)
+├── lib/           # Utils (shopify, categoryMapping, productUtils)
+└── assets/        # Images
+
+supabase/functions/  # Serverless (beauty-assistant, bulk-upload)
+public/             # Static (sitemap, robots, manifest, redirects)
 ```
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-- Node.js 18+ or Bun
-- npm, yarn, or bun
-
-### Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/asperpharma/asperbeauty.git
-
-# Navigate to project directory
-cd asperbeauty
-
-# Install dependencies
-npm install
-
-# Start development server
-npm run dev
-```
-
-### Build for Production
-
-```bash
-npm run build
-```
-
-### Preview Production Build
-
-```bash
-npm run preview
-```
-
-## 📱 Pages
-
-| Route | Description |
-|-------|-------------|
-| `/` | Home page with hero, featured products, and categories |
-| `/brands` | Browse all available brands |
-| `/brands/vichy` | Vichy brand showcase page |
-| `/collections` | Product collections |
-| `/collections/:handle` | Individual collection page |
-| `/products/:handle` | Product detail page |
-| `/skin-concerns` | Shop by skin concern |
-| `/offers` | Special offers and promotions |
-| `/best-sellers` | Best selling products |
-| `/contact` | Contact information |
-
-## 🌐 Internationalization
-
-The app supports:
-- **English** (LTR)
-- **Arabic** (RTL)
-
-Language switching is available in the header.
-
-## 🔧 Development
-
-This project is built with [Lovable](https://lovable.dev). You can:
-
-1. **Edit in Lovable**: Visit the project and start prompting
-2. **Edit locally**: Clone the repo and push changes
-3. **Edit in GitHub**: Use the web editor or Codespaces
-
-Changes sync automatically between Lovable and GitHub.
-
-## 📄 License
-
-© 2025 Asper Beauty Shop. All rights reserved.
 
 ---
 
-Built with ❤️ using [Lovable](https://lovable.dev)
+## 🔗 Integrations
+
+### Shopify
+- Store: lovable-project-milns.myshopify.com
+- API: v2025-07 | Read-only public token
+
+### Supabase
+- Project: rgehleqcubtmcwyipyvi
+- Functions: Beauty assistant AI, bulk upload
+
+### Lovable
+- Hot reload with component tagger
+- Custom domain: www.asperbeautyshop.com
+
+---
+
+## 🎨 Design Tokens
+
+| Token | Value | Usage |
+|-------|-------|-------|
+| `--maroon` | `#800020` | Primary |
+| `--soft-ivory` | `#F8F8FF` | Background |
+| `--shiny-gold` | `#C5A028` | Accent |
+| `--dark-charcoal` | `#333333` | Text |
+
+**Fonts**: Playfair Display (headings), Montserrat (body), Tajawal (Arabic)
+
+---
+
+## 📱 Key Routes
+
+| Route | Description |
+|-------|-------------|
+| `/` | Home with hero & featured products |
+| `/product/:handle` | Product details |
+| `/collections/:slug` | Collections (skin-care, hair-care, etc.) |
+| `/brands` | All brands |
+| `/contact` | Contact & social links |
+| `/wishlist` | Saved products |
+| `/admin/*` | Admin tools (protected) |
+
+---
+
+## 🔐 Environment
+
+Create `.env` and `.env.production`:
+
+```env
+VITE_SUPABASE_URL=https://rgehleqcubtmcwyipyvi.supabase.co
+VITE_SUPABASE_PROJECT_ID=rgehleqcubtmcwyipyvi
+VITE_SUPABASE_PUBLISHABLE_KEY=<your-key>
+VITE_SITE_URL=https://www.asperbeautyshop.com
+```
+
+---
+
+## 📚 Documentation
+
+- [Deployment Guide](DEPLOYMENT_GUIDE.md) - DNS & domain setup
+- [Connection Status](CONNECTION_STATUS.md) - Integration verification
+- [Copilot Instructions](.github/copilot-instructions.md) - AI agent guide
+- [Architecture](ARCHITECTURE_DIAGRAM.md) - System design
+- [Social Media](SOCIAL_MEDIA_INTEGRATION.md) - Platform connections
+
+---
+
+## 🚀 Deployment
+
+**Automatic**: Push to `main` → Lovable deploys → Live at www.asperbeautyshop.com
+
+**Manual**: `npm run build` → Upload `dist/` folder
+
+**DNS Setup** (for custom domain):
+```
+Type: CNAME | Name: www | Value: asperbeautyshop.lovable.app
+```
+
+---
+
+## 🧪 Testing
+
+```bash
+npm run lint                     # ESLint
+./verify-connections.sh          # Verify integrations (48 checks)
+npm run build && npm run preview # Test production
+```
+
+---
+
+## 📞 Contact
+
+- **Email**: asperpharma@gmail.com
+- **Phone**: +962 79 065 6666
+- **Location**: Amman, Jordan
+- **Social**: [@asper.beauty.shop](https://www.instagram.com/asper.beauty.shop/)
+
+---
+
+**Built with ❤️ by Asper Pharma** | Powered by [Lovable](https://lovable.dev)
