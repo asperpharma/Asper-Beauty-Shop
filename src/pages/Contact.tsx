@@ -100,7 +100,7 @@ export default function Contact() {
                     <h3 className="font-display text-sm text-cream mb-1">
                       {isAr ? 'البريد الإلكتروني' : 'Email'}
                     </h3>
-                    <a href="mailto:asperpharma@gmail.com" className="font-body text-cream/60 hover:text-gold transition-colors">
+                    <a href="mailto:asperpharma@gmail.com" className="font-body text-cream/80 hover:text-gold transition-colors">
                       asperpharma@gmail.com
                     </a>
                   </div>
@@ -114,9 +114,12 @@ export default function Contact() {
                     <h3 className="font-display text-sm text-cream mb-1">
                       {isAr ? 'الهاتف' : 'Phone'}
                     </h3>
-                    <a href="tel:+962790656666" className="font-body text-cream/60 hover:text-gold transition-colors" dir="ltr">
+                    <a href="tel:+962790656666" className="font-body text-cream/80 hover:text-gold transition-colors" dir="ltr">
                       +962 79 065 6666
                     </a>
+                    <p className="font-body text-xs text-cream/60 mt-1">
+                      {isAr ? 'الأحد - الخميس: 9 صباحاً - 8 مساءً' : 'Sun - Thu: 9 AM - 8 PM'}
+                    </p>
                   </div>
                 </div>
 
@@ -128,7 +131,7 @@ export default function Contact() {
                     <h3 className="font-display text-sm text-cream mb-1">
                       {isAr ? 'الموقع' : 'Location'}
                     </h3>
-                    <p className="font-body text-cream/60">
+                    <p className="font-body text-cream/80">
                       {isAr ? 'عمان، الأردن' : 'Amman, Jordan'}
                     </p>
                   </div>

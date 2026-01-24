@@ -24,17 +24,20 @@ export const About = () => {
               <p>
                 At Asper Beauty Shop, we believe true beauty emerges from the
                 harmony of premium ingredients, thoughtful formulations, and
-                mindful rituals.
+                mindful rituals. Established in Amman, Jordan, we are your
+                trusted destination for authentic luxury skincare and beauty essentials.
               </p>
               <p>
                 Each product in our collection is meticulously selected to
                 deliver exceptional results while honoring your skin's natural
-                balance. We partner exclusively with brands that share our
-                commitment to quality, sustainability, and efficacy.
+                balance. We partner exclusively with world-renowned brands that
+                share our commitment to quality, sustainability, and efficacy—from
+                Vichy and L'Oréal Paris to CeraVe, Bioderma, and SVR.
               </p>
               <p>
-                Experience the difference of luxury beauty, where every detail
-                matters and every product tells a story of excellence.
+                Experience the difference of luxury beauty with guaranteed authenticity,
+                expert consultation services, and reliable delivery across Jordan.
+                Every detail matters, and every product tells a story of excellence.
               </p>
             </div>
 

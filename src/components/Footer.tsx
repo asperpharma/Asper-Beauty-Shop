@@ -102,8 +102,11 @@ export const Footer = () => {
           <Link to="/" className="inline-block mb-6">
             <img src={asperLogo} alt="Asper Beauty Shop" className="h-16 rounded" />
           </Link>
-          <p className="font-body text-cream mb-6">
-            {isArabic ? 'إعادة تعريف الجمال في الأردن.' : 'Redefining Beauty in Jordan.'}
+          <p className="font-body text-cream/80 mb-2 leading-relaxed">
+            {isArabic ? 'وجهتك الموثوقة لمنتجات التجميل الفاخرة الأصلية في الأردن.' : 'Your trusted destination for authentic luxury beauty in Jordan.'}
+          </p>
+          <p className="font-body text-xs text-cream/60 mb-4">
+            {isArabic ? 'تأسست عام 2024 | جزء من آسبر فارما' : 'Est. 2024 | Part of Asper Pharma'}
           </p>
 
           {/* Social Icons - Gold Outlines with Full Platform Coverage */}
@@ -229,9 +232,39 @@ export const Footer = () => {
             <a href="tel:+962790656666" className="font-body text-sm text-cream hover:text-gold transition-colors duration-400 block">
               +962 79 065 6666
             </a>
+            <p className="font-body text-xs text-cream/60">
+              {isArabic ? 'الأحد - الخميس' : 'Sun - Thu'}
+            </p>
+            <p className="font-body text-xs text-cream/60">
+              {isArabic ? '9 صباحاً - 8 مساءً' : '9 AM - 8 PM'}
+            </p>
             <a href="mailto:asperpharma@gmail.com" className="font-body text-sm text-cream hover:text-gold transition-colors duration-400 block">
               asperpharma@gmail.com
             </a>
+          </div>
+
+          {/* Trust Badges */}
+          <div className="mt-4 pt-4 border-t border-gold/20">
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center gap-2">
+                <span className="text-gold text-xs">✓</span>
+                <span className="font-body text-xs text-cream/80">
+                  {isArabic ? 'منتجات أصلية 100%' : '100% Authentic Products'}
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-gold text-xs">✓</span>
+                <span className="font-body text-xs text-cream/80">
+                  {isArabic ? 'توصيل موثوق' : 'Reliable Delivery'}
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-gold text-xs">✓</span>
+                <span className="font-body text-xs text-cream/80">
+                  {isArabic ? 'دعم متخصص' : 'Expert Support'}
+                </span>
+              </div>
+            </div>
           </div>
         </div>
 

@@ -1,15 +1,15 @@
 {
   "name": "Asper Beauty Shop | Luxury Skincare & Beauty Essentials",
   "short_name": "Asper Beauty",
-  "description": "Discover premium skincare and beauty products at Asper Beauty Shop. Curated luxury essentials for your daily beauty ritual.",
-  "start_url": "/",
+  "description": "Discover premium skincare and beauty products at Asper Beauty Shop in Amman, Jordan. Curated luxury essentials from Vichy, L'Oréal Paris, CeraVe, Bioderma, and more for your daily beauty ritual.",
+  "start_url": "/?utm_source=pwa",
   "display": "standalone",
   "background_color": "#F8F8FF",
   "theme_color": "#800020",
   "orientation": "portrait-primary",
   "scope": "/",
   "lang": "en",
-  "dir": "ltr",
+  "dir": "auto",
   "icons": [
     {
       "src": "/favicon.png",
@@ -29,25 +29,38 @@
       "type": "image/x-icon"
     }
   ],
-  "categories": ["shopping", "beauty", "health"],
+  "categories": [
+    "shopping",
+    "beauty",
+    "health",
+    "lifestyle"
+  ],
   "screenshots": [],
   "shortcuts": [
     {
-      "name": "Products",
-      "short_name": "Products",
-      "description": "Browse all products",
+      "name": "Shop Collections",
+      "short_name": "Collections",
+      "description": "Browse skincare, makeup, and beauty collections",
       "url": "/collections",
       "icons": [
-        { "src": "/favicon.png", "sizes": "192x192", "type": "image/png" }
+        {
+          "src": "/favicon.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
       ]
     },
     {
-      "name": "Brands",
+      "name": "Premium Brands",
       "short_name": "Brands",
-      "description": "View all brands",
+      "description": "Explore Vichy, L'Oréal, CeraVe & more",
       "url": "/brands",
       "icons": [
-        { "src": "/favicon.png", "sizes": "192x192", "type": "image/png" }
+        {
+          "src": "/favicon.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
       ]
     },
     {
@@ -56,7 +69,11 @@
       "description": "View best selling products",
       "url": "/best-sellers",
       "icons": [
-        { "src": "/favicon.png", "sizes": "192x192", "type": "image/png" }
+        {
+          "src": "/favicon.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
       ]
     }
   ],
