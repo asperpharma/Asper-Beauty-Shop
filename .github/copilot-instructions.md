@@ -28,6 +28,7 @@ QueryClientProvider → LanguageProvider → TooltipProvider → BrowserRouter �
 ## Key Patterns & Conventions
 
 **Routing**: `src/pages/*` map to routes via React Router v6 (see `src/App.tsx` for all routes). Examples: `/`, `/product/:handle`, `/collections/:slug`, `/brands`.
+- **Admin routes**: `/admin/bulk-upload` and `/admin/orders` are protected by `<RequireAdmin>` wrapper which checks `useAuth().isAdmin` (requires Supabase auth session with admin role).
 
 **Components**:
 - **Pages**: `src/pages/*` (Index, Collections, ProductDetail, Brands, Auth, Account, etc.)
@@ -67,10 +68,14 @@ QueryClientProvider → LanguageProvider → TooltipProvider → BrowserRouter �
 **Lovable integration** (`vite.config.ts`, `lovable.config.json`):
 - Uses `lovable-tagger` plugin for hot reload component tagging.
 - Dev server on port 8080 with IPv6 (`host: "::"`).
-- Custom domain: www.asperbeautyshop.com
+- Custom domain: www.asperbeautyshop.com (redirects from non-www, enforces HTTPS via `public/_redirects`)
 - Lovable development URL: asperbeautyshop.lovable.app
-- SPA redirects configured in `public/_redirects`
-- Environment variables in `.env` (dev) and `.env.production` (prod)
+- SPA redirects configured in `public/_redirects` (all routes → `/index.html` 200)
+
+**Environment variables** (`.env` for dev, `.env.production` for prod):
+- `VITE_SUPABASE_URL` / `VITE_SUPABASE_PROJECT_ID` / `VITE_SUPABASE_PUBLISHABLE_KEY` — Supabase connection
+- `VITE_SHOPIFY_STORE_DOMAIN` / `VITE_SHOPIFY_STOREFRONT_TOKEN` / `VITE_SHOPIFY_API_VERSION` — Shopify config (hardcoded in `src/lib/shopify.ts` currently)
+- `VITE_SITE_URL` / `VITE_LOVABLE_URL` — URLs for canonical/social meta tags (production only)
 
 ## Common Tasks
 
@@ -94,6 +99,7 @@ QueryClientProvider → LanguageProvider → TooltipProvider → BrowserRouter �
 1. User clicks "Checkout" in CartDrawer
 2. Calls `cartStore.createCheckout()` which invokes `createStorefrontCheckout()` from `src/lib/shopify.ts`
 3. Redirects to Shopify-hosted checkout URL (`window.location.href = checkoutUrl`)
+4. Alternative: COD (Cash on Delivery) flow via `<CODCheckoutForm>` submits to Supabase for order processing
 
 **Add serverless function**:
 1. Create folder in `supabase/functions/` (e.g. `supabase/functions/my-function/`)
@@ -105,7 +111,9 @@ QueryClientProvider → LanguageProvider → TooltipProvider → BrowserRouter �
 **Local dev**: `npm install` → `npm run dev` (Vite dev server on http://localhost:8080)
 **Lint**: `npm run lint` (ESLint with React hooks plugin, TypeScript ESLint)
 **Build**: `npm run build` (production) → `npm run preview` (preview prod bundle locally)
+**Build (dev mode)**: `npm run build:dev` — builds with dev environment variables
 **Verify changes**: Run build and preview to validate (no unit tests in repo)
+**Audit categories**: `npx tsx scripts/audit-categories.ts` — analyzes Shopify products, identifies category mismatches, generates report (useful after bulk uploads)
 
 ## Safety Notes
 
@@ -114,5 +122,13 @@ QueryClientProvider → LanguageProvider → TooltipProvider → BrowserRouter �
 - Lovable platform integration means changes may sync to hosted preview (see README).
 - Search input sanitized in `shopify.ts` to prevent GraphQL injection.
 - Product images loaded via `<OptimizedImage>` component (see `src/components/OptimizedImage.tsx`) for performance.
+
+## Business Information
+
+**Contact**: +962 79 065 6666 | asperpharma@gmail.com | Amman, Jordan
+**Hours**: Sun-Thu 9 AM - 8 PM
+**Company**: Asper Beauty Shop (part of Asper Pharma, est. 2024)
+**Social**: 9 platforms (Instagram, Facebook, TikTok, WhatsApp, X, YouTube, LinkedIn, Snapchat, Pinterest)
+**Shipping**: Free shipping over 50 JOD, standard shipping 3 JOD, delivery 2-4 business days across Jordan
 
 For more detail on a specific area (routing, checkout flow, Supabase functions, category mapping), ask and I'll provide concrete file pointers and examples.

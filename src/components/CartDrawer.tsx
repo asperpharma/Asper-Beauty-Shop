@@ -98,9 +98,8 @@ export const CartDrawer = () => {
   return (
     <Sheet open={isOpen} onOpenChange={handleOpenChange}>
       <SheetContent
-        className={`w-full sm:max-w-md flex flex-col h-full bg-white p-0 ${
-          isRTL ? "border-r border-l-0" : "border-l"
-        } border-gold/30`}
+        className={`w-full sm:max-w-md flex flex-col h-full bg-white p-0 ${isRTL ? "border-r border-l-0" : "border-l"
+          } border-gold/30`}
         side={isRTL ? "left" : "right"}
         style={{
           transition: "transform 0.4s ease-in-out",
@@ -121,8 +120,8 @@ export const CartDrawer = () => {
               {checkoutMode === "success"
                 ? (isArabic ? "تم الطلب" : "Order Placed")
                 : checkoutMode === "cod"
-                ? (isArabic ? "الدفع عند الاستلام" : "Cash on Delivery")
-                : (isArabic ? "اختياراتك" : "Your Selection")}
+                  ? (isArabic ? "الدفع عند الاستلام" : "Cash on Delivery")
+                  : (isArabic ? "اختياراتك" : "Your Selection")}
             </SheetTitle>
             <button
               onClick={() => handleOpenChange(false)}
@@ -147,11 +146,9 @@ export const CartDrawer = () => {
                     ? "🎁 شحن مجاني مفعّل!"
                     : "🎁 Complimentary Shipping Unlocked!")
                   : (isArabic
-                    ? `أنت على بعد ${
-                      amountToFreeShipping.toFixed(0)
+                    ? `أنت على بعد ${amountToFreeShipping.toFixed(0)
                     } دينار من الشحن المجاني`
-                    : `You are ${
-                      amountToFreeShipping.toFixed(0)
+                    : `You are ${amountToFreeShipping.toFixed(0)
                     } JOD away from Complimentary Shipping`)}
               </p>
             </div>
@@ -278,15 +275,50 @@ export const CartDrawer = () => {
 
                     {/* Footer - Pinned to Bottom */}
                     <div className="flex-shrink-0 p-6 border-t border-gold/20 bg-white">
-                      {/* Subtotal */}
-                      <div className="flex justify-between items-center mb-4">
-                        <span className="font-display text-lg text-foreground">
-                          {isArabic ? "المجموع الفرعي" : "Subtotal"}
-                        </span>
-                        <span className="font-display text-xl font-bold text-foreground">
-                          {items[0]?.price.currencyCode || "JOD"}{" "}
-                          {totalPrice.toFixed(2)}
-                        </span>
+                      {/* Order Summary */}
+                      <div className="space-y-3 mb-4">
+                        <div className="flex justify-between items-center text-sm">
+                          <span className="font-body text-muted-foreground">
+                            {isArabic ? "المجموع الفرعي" : "Subtotal"}
+                          </span>
+                          <span className="font-body text-foreground">
+                            {items[0]?.price.currencyCode || "JOD"}{" "}
+                            {totalPrice.toFixed(2)}
+                          </span>
+                        </div>
+
+                        <div className="flex justify-between items-center text-sm">
+                          <span className="font-body text-muted-foreground">
+                            {isArabic ? "الشحن" : "Shipping"}
+                          </span>
+                          <span className="font-body text-gold">
+                            {hasFreeShipping
+                              ? (isArabic ? "مجاني" : "FREE")
+                              : "3.00 JOD"}
+                          </span>
+                        </div>
+
+                        <div className="border-t border-gold/20 pt-3">
+                          <div className="flex justify-between items-center">
+                            <span className="font-display text-lg text-foreground">
+                              {isArabic ? "الإجمالي" : "Total"}
+                            </span>
+                            <span className="font-display text-xl font-bold text-foreground">
+                              {items[0]?.price.currencyCode || "JOD"}{" "}
+                              {(totalPrice + (hasFreeShipping ? 0 : 3)).toFixed(2)}
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* Estimated Delivery */}
+                        <div className="flex items-center gap-2 text-xs text-muted-foreground bg-cream/50 p-2 rounded">
+                          <Truck className="w-3 h-3 flex-shrink-0" />
+                          <span className="font-body">
+                            {isArabic
+                              ? "التوصيل المتوقع: 2-4 أيام عمل"
+                              : "Estimated Delivery: 2-4 business days"}
+                          </span>
+                        </div>
                       </div>
 
                       {/* Checkout Buttons */}
@@ -325,12 +357,25 @@ export const CartDrawer = () => {
                         </button>
                       </div>
 
-                      {/* Trust Badge */}
-                      <div className="flex items-center justify-center gap-2 mt-4">
-                        <Lock className="w-3 h-3 text-muted-foreground" />
-                        <span className="text-xs text-muted-foreground font-body">
-                          {isArabic ? "توصيل آمن" : "Secure Delivery"}
-                        </span>
+                      {/* Trust Badges */}
+                      <div className="space-y-2 mt-4">
+                        <div className="flex items-center justify-center gap-2">
+                          <Lock className="w-3 h-3 text-gold" />
+                          <span className="text-xs text-muted-foreground font-body">
+                            {isArabic ? "مدفوعات آمنة ومشفرة" : "Secure & Encrypted Payments"}
+                          </span>
+                        </div>
+                        <div className="flex items-center justify-center gap-2">
+                          <Truck className="w-3 h-3 text-gold" />
+                          <span className="text-xs text-muted-foreground font-body">
+                            {isArabic ? "توصيل موثوق في عمان" : "Reliable Delivery in Amman"}
+                          </span>
+                        </div>
+                        <div className="text-center">
+                          <span className="text-xs text-gold font-display">
+                            {isArabic ? "✓ منتجات أصلية 100%" : "✓ 100% Authentic Products"}
+                          </span>
+                        </div>
                       </div>
                     </div>
                   </>
