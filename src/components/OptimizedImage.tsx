@@ -51,6 +51,8 @@ interface OptimizedImageProps {
   loading?: "lazy" | "eager";
   fetchPriority?: "high" | "low" | "auto";
   isShopify?: boolean;
+  onLoad?: () => void;
+  onError?: () => void;
 }
 
 export const OptimizedImage = ({
@@ -63,11 +65,18 @@ export const OptimizedImage = ({
   loading = "lazy",
   fetchPriority = "auto",
   isShopify = true,
+  onLoad,
+  onError,
 }: OptimizedImageProps) => {
   const isShopifyUrl = src?.includes("cdn.shopify.com");
 
+  // Prevent layout shift by calculating aspect ratio
+  const aspectRatioStyle = width && height
+    ? { aspectRatio: `${width} / ${height}` }
+    : {};
+
   if (isShopify && isShopifyUrl) {
-    const srcSet = getShopifyImageSrcSet(src, [200, 400, 600, 800, 1200]);
+    const srcSet = getShopifyImageSrcSet(src, [200, 400, 600, 800, 1200, 1600]);
     const optimizedSrc = width
       ? getOptimizedShopifyImageUrl(src, width, height)
       : src;
@@ -83,6 +92,10 @@ export const OptimizedImage = ({
         fetchPriority={fetchPriority}
         width={width}
         height={height}
+        onLoad={onLoad}
+        onError={onError}
+        decoding="async"
+        style={aspectRatioStyle}
       />
     );
   }
@@ -96,6 +109,10 @@ export const OptimizedImage = ({
       fetchPriority={fetchPriority}
       width={width}
       height={height}
+      onLoad={onLoad}
+      onError={onError}
+      decoding="async"
+      style={aspectRatioStyle}
     />
   );
 };
