@@ -105,8 +105,8 @@ QueryClientProvider → LanguageProvider → TooltipProvider → BrowserRouter �
 - All products are fetched via GraphQL queries; no REST API usage.
 
 **Supabase** (`supabase/functions/`, `src/integrations/supabase/`):
-- **Project URL**: `https://rgehleqcubtmcwyipyvi.supabase.co`
-- **Auth Callback**: `https://rgehleqcubtmcwyipyvi.supabase.co/auth/v1/callback`
+- **Project URL**: Use environment variable `VITE_SUPABASE_URL` (currently: rgehleqcubtmcwyipyvi.supabase.co)
+- **Auth Callback**: `https://rgehleqcubtmcwyipyvi.supabase.co/auth/v1/callback` (project-specific)
 - Functions: `beauty-assistant` (AI chatbot via Lovable AI Gateway at `ai.gateway.lovable.dev` using Gemini 2.5 Flash), `bulk-product-upload` (admin tool)
 - Config: `supabase/config.toml` (verify_jwt = false for functions)
 - Client: `src/integrations/supabase/client.ts` (auto-refresh sessions, persistent auth via localStorage)
@@ -194,7 +194,7 @@ QueryClientProvider → LanguageProvider → TooltipProvider → BrowserRouter �
 - Ensure code follows project conventions (component structure, naming, styling)
 - Verify bilingual support (EN/AR) for user-facing text
 - Check mobile responsiveness (mobile-first design)
-- Validate performance (optimize images with `next/image` patterns, lazy loading)
+- Validate performance (optimize images with `<OptimizedImage>` component, lazy loading)
 
 **Security Best Practices**:
 - **Never** hardcode API keys, tokens, or secrets in code
@@ -203,7 +203,7 @@ QueryClientProvider → LanguageProvider → TooltipProvider → BrowserRouter �
 - Use HTTPS for all external requests
 - Follow Supabase RLS patterns for data access control
 - Validate email addresses and phone numbers before processing
-- Report security vulnerabilities to security@asper-beauty-shop.com (see SECURITY.md)
+- Report security vulnerabilities to asperpharma@gmail.com (see SECURITY.md)
 
 **Performance & SEO**:
 - **Images**: Use `<OptimizedImage>` component (see `src/components/OptimizedImage.tsx`)
