@@ -1,0 +1,6 @@
+Feed name,Feed Id,Customer Id,Upload time
+"PRODUCTS SOURCE 4","406966179","5717495012","Jan 27, 2026, 5:27 pm PST"
+
+Item Id,Line number,Message,Type,Values,Item title
+,,"Too many subattributes for attribute: product detail",Error,&quot;Cell=R2&quot;,
+"Delete the rows that contain descriptions, instructions and examples from 2 to 5",,"Value too long in attribute: id",Warning,,

@@ -1,0 +1,26 @@
+diff --git a/NEXT_STEPS.md b/NEXT_STEPS.md
+index 50c60ba..e2ecb78 100644
+--- a/NEXT_STEPS.md
++++ b/NEXT_STEPS.md
+@@ -8,9 +8,10 @@ Your Asper Beauty Shop is **100% production-ready**. Follow these simple steps t
+ 
+ 1. **Run health checks 1–4 locally** (§ Run these health checks now).
+ 2. **If step 3 returns 503:** Set **SHOPIFY_STORE_DOMAIN** and **SHOPIFY_ACCESS_TOKEN** in Supabase → Edge Functions → Secrets (see [SHOPIFY_SETUP_CHECKLIST.md](SHOPIFY_SETUP_CHECKLIST.md)); re-run step 3 until **200**.
+-3. **Step 1: Create PR** → merge to `main` (auto-deploys).
+-4. **Step 2: DNS** → CNAME www → asperbeautyshop.lovable.app (optional).
+-5. **Step 3: Verify deployment** → test dev/production URLs and the test checklist.
++3. **Shopify pre-launch** (optional): Products, payments, shipping, theme, plan/password — see [SHOPIFY_SETUP_CHECKLIST.md](SHOPIFY_SETUP_CHECKLIST.md) § Before you go live.
++4. **Step 1: Create PR** → merge to `main` (auto-deploys).
++5. **Step 2: DNS** → CNAME www → asperbeautyshop.lovable.app (optional).
++6. **Step 3: Verify deployment** → test dev/production URLs and the test checklist.
+ 
+ ---
+ 
+@@ -50,6 +51,7 @@ If step 1 or 2 fails, fix the build or lint before merging.
+ **Step 4** is manual: open the [Supabase Dashboard](https://supabase.com/dashboard/project/rgehleqcubtmcwyipyvi), check **Logs** and **Advisors**, and fix any issues.
+ 
+ **After steps 1–4 pass**, continue with the rest of NEXT_STEPS below:
++- **Shopify pre-launch** (optional): Products, payments, shipping, theme, plan/password — [SHOPIFY_SETUP_CHECKLIST.md](SHOPIFY_SETUP_CHECKLIST.md) § Before you go live
+ - **Step 1: Create PR** → merge to `main` (auto-deploys)
+ - **Step 2: DNS** → CNAME www → asperbeautyshop.lovable.app (optional, for custom domain)
+ - **Step 3: Verify deployment** → test dev and production URLs, run test checklist

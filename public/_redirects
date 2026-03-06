@@ -1,0 +1,9 @@
+# Netlify/Lovable redirects for SPA routing
+/*    /index.html   200
+
+# Redirect non-www to www
+https://asperbeautyshop.com/*  https://www.asperbeautyshop.com/:splat  301!
+
+# Force HTTPS
+http://www.asperbeautyshop.com/*  https://www.asperbeautyshop.com/:splat  301!
+http://asperbeautyshop.com/*  https://www.asperbeautyshop.com/:splat  301!

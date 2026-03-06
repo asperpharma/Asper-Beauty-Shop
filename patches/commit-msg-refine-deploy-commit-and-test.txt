@@ -1,0 +1,6 @@
+docs: refine formatting and shell examples in DEPLOY_COMMIT_AND_TEST
+
+- Rename "Title" section heading to "PR Title" for consistency
+- Wrap file paths (patches/README.md) in backticks
+- Encapsulate Base URL in a code block for easier copying
+- Split GET and POST curl examples into distinct powershell and sh blocks to prevent syntax errors

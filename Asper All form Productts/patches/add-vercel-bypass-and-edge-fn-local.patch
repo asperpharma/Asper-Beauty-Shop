@@ -1,0 +1,36 @@
+diff --git a/docs/DEPLOYMENT_TEMPLATE.md b/docs/DEPLOYMENT_TEMPLATE.md
+--- a/docs/DEPLOYMENT_TEMPLATE.md
++++ b/docs/DEPLOYMENT_TEMPLATE.md
+@@ -4,9 +4,37 @@ When deploying on Vercel, secure sensitive backend endpoints by requiring your f
+ - **How:**
+   Set the secret token as an environment variable in Vercel project settings.
+ 
++- **Usage:**
++  Your frontend must include this header in any request to protected backend routes. The backend checks for the presence and value of this header before processing the request.
++
++- **Why:**
++  Prevents unauthorized or external requests from reaching sensitive endpoints, even if the API surface is public.
++
++Example:
++
++Frontend request:
++```js
++fetch('/api/my-endpoint', {
++  headers: {
++    'X-Bypass-Token': process.env.NEXT_PUBLIC_BYPASS_TOKEN
++  }
++})
++```
++
++Backend check (Node/Express/Python/etc.):
++```js
++if (req.headers['x-bypass-token'] !== process.env.BYPASS_TOKEN) {
++  return res.status(401).json({ error: 'Unauthorized' });
++}
++```
++
++Ensure your secret is never exposed in the public repo or frontend code. Only share the value through project/env settings.
++
+ ---
+ 
+ ## Running Supabase Edge Functions Locally

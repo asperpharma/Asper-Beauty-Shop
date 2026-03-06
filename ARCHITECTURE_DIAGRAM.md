@@ -1,0 +1,431 @@
+# Asper Beauty Shop - Architecture Diagram
+
+## 🏗️ System Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                     LOVABLE PLATFORM                            │
+│  (Live Editing, Hot Reload, Component Tagging)                  │
+└────────────────────────┬────────────────────────────────────────┘
+                         │
+                         ↓
+┌─────────────────────────────────────────────────────────────────┐
+│                   VITE DEV SERVER                               │
+│                  http://localhost:8080                          │
+│  • Hot Module Replacement (HMR)                                 │
+│  • React Fast Refresh                                           │
+│  • Lovable Component Tagger                                     │
+└────────────────────────┬────────────────────────────────────────┘
+                         │
+                         ↓
+┌─────────────────────────────────────────────────────────────────┐
+│                   REACT APPLICATION                             │
+│                                                                 │
+│  ┌─────────────────────────────────────────────────────┐      │
+│  │  QueryClientProvider (TanStack Query)                │      │
+│  │    └─ LanguageProvider (i18n EN/AR)                 │      │
+│  │       └─ TooltipProvider                             │      │
+│  │          └─ BrowserRouter (React Router v6)         │      │
+│  │             └─ Routes & Pages                        │      │
+│  └─────────────────────────────────────────────────────┘      │
+│                                                                 │
+│  ┌─────────────────┐  ┌──────────────────┐                    │
+│  │  PAGES          │  │  COMPONENTS       │                    │
+│  │  • Index        │  │  • Header         │                    │
+│  │  • Product      │  │  • Footer         │                    │
+│  │  • Collections  │  │  • ProductCard    │                    │
+│  │  • Brands       │  │  • CartDrawer     │                    │
+│  │  • Auth         │  │  • BeautyAssist   │                    │
+│  │  • Admin        │  │  • SearchDropdown │                    │
+│  └─────────────────┘  └──────────────────┘                    │
+│                                                                 │
+│  ┌─────────────────┐  ┌──────────────────┐                    │
+│  │  STORES (Zustand) │  │  HOOKS          │                    │
+│  │  • cartStore    │  │  • useAuth       │                    │
+│  │  • wishlistStore│  │  • useToast      │                    │
+│  └─────────────────┘  │  • useMobile     │                    │
+│                       └──────────────────┘                    │
+└────────────────────┬──────────────┬──────────────┬─────────────┘
+                     │              │              │
+                     ↓              ↓              ↓
+        ┌────────────────┐  ┌──────────────┐  ┌─────────────┐
+        │   SHOPIFY      │  │   SUPABASE   │  │  BROWSER    │
+        │   STOREFRONT   │  │              │  │  STORAGE    │
+        │   API          │  │              │  │             │
+        └────────────────┘  └──────────────┘  └─────────────┘
+```
+
+## 🔄 Data Flow Patterns
+
+### Pattern 1: Product Catalog Display
+
+```
+┌──────────┐
+│  User    │
+│ Navigates│
+└────┬─────┘
+     │
+     ↓
+┌─────────────────┐
+│  Page Component │  (e.g., Collections.tsx)
+│  useEffect()    │
+└────┬────────────┘
+     │
+     ↓
+┌──────────────────────┐
+│  fetchProducts()     │  (src/lib/shopify.ts)
+│  or                  │
+│  fetchProductsPagin  │
+└────┬─────────────────┘
+     │
+     ↓  GraphQL Query
+┌─────────────────────────────────────────┐
+│  Shopify Storefront API                 │
+│  lovable-project-milns.myshopify.com    │
+│  • Products Query                        │
+│  • Pagination Support                    │
+│  • Search Queries                        │
+└────┬────────────────────────────────────┘
+     │
+     ↓  JSON Response
+┌──────────────────┐
+│  Product Data    │
+│  • id, title     │
+│  • images        │
+│  • variants      │
+│  • prices        │
+└────┬─────────────┘
+     │
+     ↓  Filter & Map
+┌─────────────────────┐
+│  categorizeProduct() │ (categoryMapping.ts)
+│  translateTitle()    │ (productUtils.ts)
+└────┬────────────────┘
+     │
+     ↓
+┌────────────────┐
+│  ProductCard   │  × N
+│  Components    │
+└────────────────┘
+```
+
+### Pattern 2: Shopping Cart Flow
+
+```
+┌──────────────┐
+│  User clicks │
+│  "Add to Cart"│
+└──────┬───────┘
+       │
+       ↓
+┌───────────────────────┐
+│  ProductCard.tsx      │
+│  onClick handler      │
+└──────┬────────────────┘
+       │
+       ↓
+┌──────────────────────────────┐
+│  cartStore.addItem()         │  (Zustand)
+│  • Updates state             │
+│  • Saves to localStorage     │
+└──────┬───────────────────────┘
+       │
+       ↓
+┌───────────────────────────────┐
+│  CartDrawer Updates           │  (React re-render)
+│  • Shows new item             │
+│  • Updates total              │
+│  • Badge shows count          │
+└──────┬────────────────────────┘
+       │
+       ↓  User clicks checkout
+┌─────────────────────────────────┐
+│  createStorefrontCheckout()     │  (shopify.ts)
+│  • Sends cart items             │
+│  • Creates Shopify cart         │
+└──────┬──────────────────────────┘
+       │
+       ↓  GraphQL Mutation
+┌──────────────────────────────────┐
+│  Shopify Cart API                │
+│  • Creates cart                  │
+│  • Returns checkoutUrl           │
+└──────┬───────────────────────────┘
+       │
+       ↓
+┌──────────────────────────────────┐
+│  window.location.href =          │
+│  checkoutUrl                     │
+└──────────────────────────────────┘
+```
+
+### Pattern 3: AI Beauty Assistant
+
+```
+┌──────────────┐
+│  User opens  │
+│  Assistant   │
+└──────┬───────┘
+       │
+       ↓
+┌─────────────────────────┐
+│  BeautyAssistant.tsx    │
+│  • Opens chat window    │
+│  • Shows welcome msg    │
+└──────┬──────────────────┘
+       │
+       ↓  User types question
+┌───────────────────────────────┐
+│  handleSend()                 │
+│  • Collects messages          │
+│  • Gets JWT token             │
+└──────┬────────────────────────┘
+       │
+       ↓  POST with Authorization
+┌────────────────────────────────────────┐
+│  Supabase Function                     │
+│  /functions/v1/beauty-assistant        │
+│  • Validates JWT                       │
+│  • Authenticates user                  │
+└──────┬─────────────────────────────────┘
+       │
+       ↓  Forward to AI
+┌────────────────────────────────────────┐
+│  Lovable AI Gateway                    │
+│  ai.gateway.lovable.dev                │
+│  • Model: gemini-2.5-flash             │
+│  • System prompt: beauty expert        │
+│  • Stream: true                        │
+└──────┬─────────────────────────────────┘
+       │
+       ↓  Streaming response
+┌────────────────────────────────────────┐
+│  Stream Reader in Component            │
+│  • Reads chunks                        │
+│  • Updates UI progressively            │
+│  • Shows typing effect                 │
+└──────┬─────────────────────────────────┘
+       │
+       ↓
+┌────────────────┐
+│  User sees     │
+│  AI response   │
+└────────────────┘
+```
+
+### Pattern 4: Authentication Flow
+
+```
+┌──────────────┐
+│  User clicks │
+│  Sign In     │
+└──────┬───────┘
+       │
+       ↓
+┌─────────────────┐
+│  Auth.tsx       │
+│  Login form     │
+└──────┬──────────┘
+       │
+       ↓  credentials
+┌──────────────────────────────┐
+│  supabase.auth.signInWith    │
+│  EmailAndPassword()          │
+└──────┬───────────────────────┘
+       │
+       ↓
+┌─────────────────────────────────┐
+│  Supabase Auth API              │
+│  • Validates credentials        │
+│  • Creates session              │
+│  • Issues JWT token             │
+└──────┬──────────────────────────┘
+       │
+       ↓
+┌─────────────────────────────────┐
+│  localStorage                   │
+│  • Stores session               │
+│  • Stores JWT                   │
+│  • Auto-refresh enabled         │
+└──────┬──────────────────────────┘
+       │
+       ↓
+┌─────────────────────────────────┐
+│  useAuth hook updates           │
+│  • user state                   │
+│  • isAuthenticated              │
+│  • Navigate to /account         │
+└─────────────────────────────────┘
+```
+
+## 🔌 Integration Points
+
+### 1. Lovable Platform Integration
+
+```
+┌────────────────────────────────┐
+│  vite.config.ts                │
+│                                │
+│  plugins: [                    │
+│    react(),                    │
+│    componentTagger()  ← Lovable│
+│  ]                             │
+└────────────────────────────────┘
+         │
+         ↓
+┌────────────────────────────────┐
+│  Enables:                      │
+│  • Live component selection    │
+│  • Hot module reload           │
+│  • Visual editing              │
+│  • Real-time preview           │
+└────────────────────────────────┘
+```
+
+### 2. State Persistence
+
+```
+┌────────────────┐
+│  Zustand Store │
+└────┬───────────┘
+     │
+     ↓
+┌────────────────────────────┐
+│  persist() middleware      │
+│  createJSONStorage()       │
+└────┬───────────────────────┘
+     │
+     ↓
+┌────────────────────────────┐
+│  localStorage              │
+│  • asper-cart              │
+│  • asper-wishlist          │
+└────────────────────────────┘
+```
+
+### 3. API Request Flow
+
+```
+┌──────────────────┐
+│  Component       │
+└────┬─────────────┘
+     │
+     ↓
+┌──────────────────────────┐
+│  API Function            │
+│  (shopify.ts)            │
+└────┬─────────────────────┘
+     │
+     ↓
+┌────────────────────────────────────┐
+│  storefrontApiRequest()            │
+│  • Adds headers                    │
+│  • Adds auth token                 │
+│  • Error handling                  │
+└────┬───────────────────────────────┘
+     │
+     ↓
+┌────────────────────────────────────┐
+│  fetch() to Shopify                │
+│  • POST GraphQL query              │
+│  • Receives JSON response          │
+└────┬───────────────────────────────┘
+     │
+     ↓
+┌────────────────────────────────────┐
+│  Response processed                │
+│  • Errors caught & displayed       │
+│  • Data returned to component      │
+└────────────────────────────────────┘
+```
+
+## 📱 Component Hierarchy
+
+```
+App.tsx
+├── Header
+│   ├── PromotionBar
+│   ├── Logo
+│   ├── SearchDropdown
+│   ├── LanguageSwitcher
+│   ├── CartDrawer (global)
+│   └── WishlistDrawer (global)
+│
+├── Routes
+│   ├── Index (Home)
+│   │   ├── Hero
+│   │   ├── CategoryHighlights
+│   │   ├── FeaturedBrands
+│   │   ├── BestSellers
+│   │   ├── NewArrivals
+│   │   ├── FeaturedDeals
+│   │   ├── TrendingProducts
+│   │   ├── Testimonials
+│   │   ├── Newsletter
+│   │   └── TrustBanner
+│   │
+│   ├── Collections
+│   │   └── ProductGrid
+│   │       ├── ProductFilters (optional)
+│   │       └── ProductCard × N
+│   │
+│   ├── ProductDetail
+│   │   ├── Product images
+│   │   ├── Product info
+│   │   ├── Variant selector
+│   │   └── Add to cart
+│   │
+│   ├── Brands
+│   │   └── FeaturedBrands
+│   │
+│   └── Auth
+│       ├── Login form
+│       └── Signup form
+│
+├── Footer
+│   ├── Brand info
+│   ├── Navigation links
+│   ├── Social media
+│   └── Newsletter signup
+│
+├── BeautyAssistant (floating)
+│   ├── Pill button
+│   └── Chat window
+│       ├── Messages
+│       ├── Quick prompts
+│       └── Input field
+│
+└── ScrollToTop
+```
+
+## 🎯 Key Takeaways
+
+### ✅ Properly Connected
+
+1. **Vite** ↔️ **Lovable Platform** (component tagger enabled)
+2. **React App** ↔️ **Shopify API** (GraphQL queries)
+3. **React App** ↔️ **Supabase** (Auth + Functions)
+4. **Supabase Functions** ↔️ **Lovable AI Gateway** (streaming)
+5. **Zustand Stores** ↔️ **localStorage** (persistence)
+6. **React Router** ↔️ **Page Components** (navigation)
+
+### 🔄 Data Flows
+
+- Products: Shopify → Components
+- Cart/Wishlist: Zustand ↔️ localStorage
+- Auth: Supabase ↔️ localStorage
+- AI Chat: Component → Supabase → Lovable AI → Component
+- Checkout: Component → Shopify → External URL
+
+### 🎨 Patterns Used
+
+- **Container/Presentation**: Page components + UI components
+- **Hooks**: Custom hooks for reusable logic
+- **Context**: Language/i18n management
+- **Store**: Global state with Zustand
+- **Query**: Data fetching with TanStack Query (where needed)
+- **Route Protection**: HOC for admin routes
+
+---
+
+**Everything is connected and working! 🎉**

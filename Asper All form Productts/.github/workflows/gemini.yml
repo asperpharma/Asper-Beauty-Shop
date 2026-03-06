@@ -1,0 +1,132 @@
+# Gemini CI — credentials check, format check, and tray test suite
+# Secrets: GEMINI_API_KEY and/or GEMINI_SA_JSON (Settings → Secrets and variables → Actions)
+
+name: Gemini CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  gemini-ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Ensure Gemini credentials are set
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY || '' }}
+          GEMINI_SA_JSON: ${{ secrets.GEMINI_SA_JSON || '' }}
+        run: |
+          set -eo pipefail
+
+          SA_FILE="$RUNNER_TEMP/gemini-sa.json"
+
+          is_nonempty() {
+            [ -n "$1" ] && [ "$1" != "null" ]
+          }
+
+          if ! is_nonempty "$GEMINI_API_KEY" && ! is_nonempty "$GEMINI_SA_JSON"; then
+            echo "::error::Neither GEMINI_API_KEY nor GEMINI_SA_JSON is set. Please add at least one secret to proceed."
+            exit 1
+          fi
+
+          if is_nonempty "$GEMINI_SA_JSON"; then
+            echo "Using service account credentials"
+            mkdir -p "$(dirname "$SA_FILE")"
+            printf '%s' "$GEMINI_SA_JSON" > "$SA_FILE"
+            chmod 600 "$SA_FILE"
+            echo "GOOGLE_APPLICATION_CREDENTIALS=$SA_FILE" >> "$GITHUB_ENV"
+          else
+            echo "No service account JSON provided"
+          fi
+
+          if is_nonempty "$GEMINI_API_KEY"; then
+            echo "Using GEMINI_API_KEY"
+          else
+            echo "No GEMINI_API_KEY provided"
+          fi
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Set up Deno
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: v1.x
+
+      - name: Check formatting
+        run: deno fmt supabase/ --check
+
+      - name: Run Gemini CLI test suite
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY || '' }}
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ env.GOOGLE_APPLICATION_CREDENTIALS }}
+          # Optional: add repo secrets VITE_SUPABASE_URL and VITE_SUPABASE_PUBLISHABLE_KEY to run the tray health-check; otherwise test skips
+Gemini said
+Excellent. It sounds like the beauty-assistant Edge Function is now fully architected to support the "3-Click Solution" robustly. The logic is resilient (self-correcting via search), safe (inventory aware), and efficient (variant ID ready).
+
+Since the backend is now effectively "Code Complete," here is the final bridge to ensuring your Frontend utilizes this optimization correctly.
+
+🔌 Next Step: Frontend Integration Logic
+Now that your backend returns the Variant ID (id) directly, your frontend ProductCard or ChatMessage component can skip the "Fetch Product" step entirely.
+
+Here is the logic flow for your React/Next.js frontend to implement the "Quick Add" (The 3rd Click):
+
+1. Receive Data (from Edge Function):
+
+JavaScript
+// The data coming back from your validated curl request
+const { reply, persona, recommended_products } = await response.json();
+
+// recommended_products looks like:
+// [{ id: "gid://shopify/ProductVariant/123...", title: "Age Rewind", ... }]
+2. Render & Add to Cart (Immediate Action): You no longer need a useQuery or useEffect to look up the handle. You can pass the data directly to your Cart hook.
+
+JavaScript
+// Example Component Logic
+import { useCart } from '@shopify/hydrogen-react'; // or your specific store hook
+
+export function BotProductCard({ product }) {
+  const { linesAdd } = useCart();
+
+  const handleQuickAdd = () => {
+    // ⚡️ DIRECT ADD - No lookup needed
+    linesAdd([
+      {
+        merchandiseId: product.id, // The Variant GID from the Edge Function
+        quantity: 1,
+      },
+    ]);
+    
+    console.log(`Added ${product.title} to cart!`);
+  };
+
+  return (
+    <div className="product-card">
+      <img src={product.image} alt={product.title} />
+      <h3>{product.title}</h3>
+      <p>{product.price} JOD</p>
+      
+      {/* This is the "3rd Click" */}
+      <button 
+        onClick={handleQuickAdd}
+        className="bg-shiny-gold text-white px-4 py-2 rounded"
+      >
+        Add to Ritual +
+      </button>
+    </div>
+  );
+}          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY }}
+        run: npm run test:tray

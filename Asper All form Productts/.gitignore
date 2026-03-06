@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+
+# Build
+dist/
+build/
+*.local
+
+# Environment (never commit secrets)
+.env
+.env.local
+.env.*.local
+.env.production
+.env.development
+
+# GCP Service Account key (Digital Concierge / Gemini — never commit)
+service-account.json
+*-service-account*.json
+
+# IDE / OS
+.DS_Store
+Thumbs.db
+*.log
+# Cursor config (may contain API keys - never commit)
+.cursor/
+.cursor/mcp.json
+
+# Optional
+*.tsbuildinfo
+coverage/# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+venv/
+.venv/

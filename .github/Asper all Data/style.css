@@ -1,0 +1,891 @@
+/* --- 1. FONTS & VARIABLES --- */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Montserrat:wght@300;400;600&display=swap');
+
+:root {
+    /* The Signature Palette */
+    --burgundy: #580c13;
+    /* Deep Imperial Burgundy */
+    --cream: #fdfaf5;
+    /* Soft Pearl Cream */
+    --gold: #c5a059;
+    /* Antique Metallic Gold */
+    --gold-glow: rgba(197, 160, 89, 0.2);
+
+    /* Typography */
+    --font-serif: 'Cormorant Garamond', serif;
+    --font-sans: 'Montserrat', sans-serif;
+
+    /* Spacing & Transitions */
+    --section-padding: 100px 10%;
+    --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* --- 2. GLOBAL RESET --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--cream);
+    color: var(--burgundy);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* --- 3. TYPOGRAPHY --- */
+h1,
+h2,
+h3 {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+p {
+    font-weight: 300;
+    color: #4a4a4a;
+    font-size: 1.05rem;
+}
+
+/* --- 4. NAVIGATION --- */
+nav {
+    padding: 30px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--gold-glow);
+    background: var(--cream);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    letter-spacing: 4px;
+    font-weight: 600;
+}
+
+.logo span {
+    color: var(--gold);
+}
+
+/* --- 5. HERO SECTION --- */
+.hero {
+    padding: var(--section-padding);
+    min-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    /* Ensure the Hero section is the reference point */
+    overflow: hidden;
+}
+
+.hero h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: 20px;
+    position: relative;
+    /* Ensure text sits above shimmer */
+    z-index: 2;
+}
+
+.hero p,
+.hero button {
+    position: relative;
+    z-index: 2;
+}
+
+.gold-shimmer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(197, 160, 89, 0.15) 0%, rgba(197, 160, 89, 0) 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    /* Allows users to click buttons through the shimmer */
+    z-index: 1;
+    filter: blur(80px);
+    transform: translate(-50%, -50%);
+    transition: transform 0.2s ease-out;
+    /* Smooths out the movement */
+}
+
+/* --- 6. PRODUCT CARDS (THE FLOATING BOUTIQUE) --- */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+    padding: var(--section-padding);
+}
+
+.product-card {
+    background: #ffffff;
+    padding: 20px;
+    border: 1px solid transparent;
+    text-align: center;
+    transition: var(--transition);
+    position: relative;
+}
+
+/* The subtle "Antigravity" Lift */
+.product-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--gold);
+    box-shadow: 0 20px 40px rgba(88, 12, 19, 0.05);
+}
+
+/* Container for the Hover Magic */
+.product-image-wrapper {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--cream);
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.product-image-container {
+    background-color: var(--cream);
+    height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.product-image-container img,
+.product-image-container span {
+    max-width: 80%;
+    max-height: 80%;
+    object-fit: contain;
+    transition: all 0.5s ease;
+}
+
+/* The Overlay (Hidden by Default) */
+.ingredient-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(253, 250, 245, 0.92);
+    /* Semi-transparent Pearl Cream */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(10px);
+}
+
+/* Hover State */
+.product-card:hover .ingredient-overlay {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.product-card:hover .product-image-container img,
+.product-card:hover .product-image-container span {
+    filter: blur(4px) grayscale(20%);
+    transform: scale(1.05);
+}
+
+/* Typography for Overlay */
+.overlay-title {
+    font-family: var(--font-serif);
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.gold-divider-small {
+    width: 30px;
+    height: 1px;
+    background-color: var(--gold);
+    margin-bottom: 15px;
+}
+
+.ingredient-list {
+    list-style: none;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--burgundy);
+    font-weight: 400;
+    padding: 0;
+    margin: 0;
+}
+
+.ingredient-list li {
+    margin-bottom: 5px;
+    font-style: italic;
+}
+
+.view-details {
+    margin-top: 20px;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid var(--gold);
+
+    /* --- 9. BOUTIQUE ENHANCEMENTS --- */
+
+    /* Dermatologist's Seal */
+    .auth-seal {
+        margin-top: 15px;
+        opacity: 0.9;
+    }
+
+    /* Wax Seal Animation */
+    .wax-seal {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 80px;
+        height: 80px;
+        background-color: var(--burgundy);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--gold);
+        font-family: var(--font-serif);
+        font-size: 2.5rem;
+        font-weight: bold;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3), inset 0 2px 5px rgba(255, 255, 255, 0.1);
+        z-index: 100;
+        pointer-events: none;
+        border: 2px solid var(--gold);
+
+        /* Initial State for Animation */
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 0;
+    }
+
+    /* Stamp Effect */
+    @keyframes stamp-in {
+        0% {
+            transform: translate(-50%, -50%) scale(2);
+            opacity: 0;
+        }
+
+        50% {
+            transform: translate(-50%, -50%) scale(0.9);
+            opacity: 1;
+        }
+
+        70% {
+            transform: translate(-50%, -50%) scale(1.0);
+        }
+
+        100% {
+            transform: translate(-50%, -50%) scale(1.0);
+            opacity: 1;
+        }
+    }
+
+    /* Float to Bag Effect */
+    @keyframes float-to-bag {
+        0% {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+
+        100% {
+            top: 30px;
+            left: 95%;
+            transform: scale(0.2);
+            opacity: 0;
+        }
+    }
+
+    .wax-seal.stamping {
+        animation: stamp-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    .wax-seal.floating {
+        animation: float-to-bag 1s ease-in forwards;
+    }
+
+    /* Add to Bag Button */
+    .btn-add-cart {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 8px 20px;
+        background: transparent;
+        border: 1px solid var(--gold);
+        color: var(--gold);
+        font-size: 0.7rem;
+        cursor: pointer;
+        transition: all 0.3s;
+        font-family: var(--font-sans);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .btn-add-cart:hover {
+        background: var(--gold);
+        color: white;
+    }
+
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.product-price {
+    color: var(--gold);
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/* --- 7. LUXURY BUTTONS --- */
+.btn-primary {
+    background-color: var(--burgundy);
+    color: white;
+    padding: 15px 40px;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    border: 1px solid var(--burgundy);
+    cursor: pointer;
+    transition: var(--transition);
+    margin-top: 20px;
+}
+
+.btn-primary:hover {
+    background-color: transparent;
+    color: var(--burgundy);
+    border-color: var(--gold);
+}
+
+/* --- 8. THE GOLD DIVIDER --- */
+.divider {
+    height: 1px;
+    width: 100px;
+    background-color: var(--gold);
+    margin: 40px auto;
+}
+
+/* --- 9. BOUTIQUE ENHANCEMENTS --- */
+
+/* Dermatologist's Seal */
+.auth-seal {
+    margin-top: 15px;
+    opacity: 0.9;
+}
+
+/* Wax Seal Animation */
+/* Wax Seal Animation (The "Melted" Boutique Update) */
+
+/* The Seal Container */
+#wax-seal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(5);
+    /* Starts large like it's coming at the screen */
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0;
+}
+
+/* The Wax Texture */
+.wax-body {
+    width: 100px;
+    height: 100px;
+    background: var(--burgundy);
+    border-radius: 50% 48% 52% 49% / 49% 51% 49% 51%;
+    /* Irregular "melted" circle */
+    box-shadow:
+        inset 2px 2px 5px rgba(255, 255, 255, 0.1),
+        3px 5px 15px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+/* The Gold "A" Logo */
+.wax-logo {
+    font-family: var(--font-serif);
+    color: var(--gold);
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    user-select: none;
+}
+
+/* The "Stamp" Animation */
+.stamping {
+    animation: stamp-motion 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes stamp-motion {
+    0% {
+        transform: translate(-50%, -50%) scale(3);
+        opacity: 0;
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+
+    80% {
+        transform: translate(-50%, -50%) scale(1.05);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+
+/* Fading out to the cart */
+.fade-to-cart {
+    transition: all 0.5s ease-in;
+    transform: translate(40vw, -45vh) scale(0.2) !important;
+    opacity: 0 !important;
+}
+
+}
+
+/* Stamp Effect */
+@keyframes stamp-in {
+    0% {
+        transform: translate(-50%, -50%) scale(2);
+        opacity: 0;
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(0.9);
+        opacity: 1;
+    }
+
+    70% {
+        transform: translate(-50%, -50%) scale(1.0);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1.0);
+        opacity: 1;
+    }
+}
+
+/* Float to Bag Effect */
+@keyframes float-to-bag {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        top: 30px;
+        left: 95%;
+        transform: scale(0.2);
+        opacity: 0;
+    }
+}
+
+.wax-seal.stamping {
+    animation: stamp-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.wax-seal.floating {
+    animation: float-to-bag 1s ease-in forwards;
+}
+
+/* Add to Bag Button */
+.btn-add-cart {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 20px;
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-size: 0.7rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: var(--font-sans);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-add-cart:hover {
+    background: var(--gold);
+    color: white;
+}
+
+/* --- 10. FINAL POLISH --- */
+
+/* Image Unification */
+.product-image-container img {
+    mix-blend-mode: multiply;
+    /* Blends product into your Pearl Cream background */
+    filter: contrast(105%) brightness(102%);
+    /* Adds a high-end "pop" */
+}
+
+/* Asper Guarantee Badge */
+.asper-guarantee {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    border: 1px solid var(--gold);
+    padding: 10px 20px;
+    background: rgba(253, 250, 245, 0.9);
+    backdrop-filter: blur(5px);
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--burgundy);
+    z-index: 900;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.asper-guarantee::before {
+    content: '✦';
+    color: var(--gold);
+}
+
+/* "Asper Signature" Thank You Note */
+.thank-you-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(88, 12, 19, 0.4);
+    /* Dimmed burgundy backdrop */
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+.thank-you-card {
+    background: var(--cream);
+    padding: 60px;
+    max-width: 600px;
+    text-align: center;
+    border: 1px solid rgba(197, 160, 89, 0.3);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    transform: translateY(20px);
+    transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    position: relative;
+    /* Embossed effect simulation */
+    background-image: linear-gradient(135deg, #fdfaf5 0%, #f4efe6 100%);
+}
+
+.thank-you-modal.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.thank-you-modal.active .thank-you-card {
+    transform: translateY(0);
+}
+
+.thank-you-title {
+    font-family: var(--font-serif);
+    color: var(--burgundy);
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.thank-you-message {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    color: #555;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+.hand-signature {
+    font-family: cursive;
+    /* Fallback, ideally a signature font */
+    color: var(--gold);
+    font-size: 1.5rem;
+    margin-top: 20px;
+}
+
+/* Ghost Image Loader (Shimmer) */
+.ghost-loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(110deg, #fdfaf5 8%, #f8f1e6 18%, #fdfaf5 33%);
+    background-size: 200% 100%;
+    animation: ghost-shimmer 1.5s linear infinite;
+    z-index: 5;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.ghost-loader.loading {
+    opacity: 1;
+}
+
+@keyframes ghost-shimmer {
+    to {
+        background-position-x: -200%;
+    }
+}
+
+/* --- 10. FINAL POLISH --- */
+
+/* Image Unification */
+.product-image-container img {
+    mix-blend-mode: multiply;
+    /* Blends product into your Pearl Cream background */
+    filter: contrast(105%) brightness(102%);
+    /* Adds a high-end "pop" */
+}
+
+/* Asper Guarantee Badge (Moved for UI Balance) */
+.asper-guarantee {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    /* Moved to left to balance WhatsApp */
+    border: 1px solid var(--gold);
+    padding: 10px 20px;
+    background: rgba(253, 250, 245, 0.9);
+    backdrop-filter: blur(5px);
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--burgundy);
+    z-index: 900;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.asper-guarantee::before {
+    content: '✦';
+    color: var(--gold);
+}
+
+/* WhatsApp Concierge Button */
+.whatsapp-concierge {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--burgundy);
+    /* Luxury over standard green */
+    color: var(--gold);
+    padding: 12px 25px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    font-weight: 500;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    border: 1px solid var(--gold);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.whatsapp-concierge:hover {
+    transform: translateY(-5px);
+    background-color: #4a0910;
+    /* Darker burgundy */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header {
+        padding: 15px 20px;
+        /* "Amman Mobile" Optimization: strict height limit */
+        max-height: 15vh;
+        overflow: hidden;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 15px;
+    }
+
+    /* Ensure Gold Buttons are tap-friendly */
+    .btn-primary,
+    .btn-add-cart {
+        min-height: 44px;
+        /* Apple Human Interface Guidelines */
+        font-size: 0.9rem;
+    }
+
+    /* Adjust Floating Elements for Mobile */
+    .whatsapp-concierge {
+        bottom: 80px;
+        /* Stack above bottom bar if any, or just higher */
+        right: 15px;
+        padding: 10px 20px;
+        font-size: 0.75rem;
+    }
+
+    .asper-guarantee {
+        bottom: 15px;
+        left: 15px;
+        font-size: 0.6rem;
+        padding: 8px 15px;
+        max-width: 150px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+/* --- 11. HIGH-VALUE SPARKLE (ELITE TIER) --- */
+
+/* The "Gold Dust" Glint for products > 100 JD */
+.sparkle-element {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle, rgba(197, 160, 89, 0.8) 0%, rgba(197, 160, 89, 0) 70%);
+    pointer-events: none;
+    z-index: 10;
+    border-radius: 50%;
+    mix-blend-mode: screen;
+    filter: blur(2px);
+    animation: glint-pulse 1s infinite ease-in-out;
+}
+
+@keyframes glint-pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.3;
+    }
+
+    50% {
+        transform: scale(1.5);
+        opacity: 0.7;
+    }
+}
+
+/* "Asper Signature" Thank You Note */
+.thank-you-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(88, 12, 19, 0.4);
+    /* Dimmed burgundy backdrop */
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+.thank-you-card {
+    background: var(--cream);
+    padding: 60px;
+    max-width: 600px;
+    text-align: center;
+    border: 1px solid rgba(197, 160, 89, 0.3);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    transform: translateY(20px);
+    transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    position: relative;
+    /* Embossed effect simulation */
+    background-image: linear-gradient(135deg, #fdfaf5 0%, #f4efe6 100%);
+}
+
+.thank-you-modal.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.thank-you-modal.active .thank-you-card {
+    transform: translateY(0);
+}
+
+.thank-you-title {
+    font-family: var(--font-serif);
+    color: var(--burgundy);
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.thank-you-message {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    color: #555;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+.hand-signature {
+    font-family: cursive;
+    /* Fallback, ideally a signature font */
+    color: var(--gold);
+    font-size: 1.5rem;
+    margin-top: 20px;
+}
+
+/* Ghost Image Loader (Shimmer) */
+.ghost-loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(110deg, #fdfaf5 8%, #f8f1e6 18%, #fdfaf5 33%);
+    background-size: 200% 100%;
+    animation: ghost-shimmer 1.5s linear infinite;
+    z-index: 5;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.ghost-loader.loading {
+    opacity: 1;
+}
+
+@keyframes ghost-shimmer {
+    to {
+        background-position-x: -200%;
+    }
+}

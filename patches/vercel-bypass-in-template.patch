@@ -1,0 +1,20 @@
+diff --git a/docs/DEPLOYMENT_TEMPLATE.md b/docs/DEPLOYMENT_TEMPLATE.md
+index 8774da8..9d24f59 100644
+--- a/docs/DEPLOYMENT_TEMPLATE.md
++++ b/docs/DEPLOYMENT_TEMPLATE.md
+@@ -68,3 +68,15 @@ curl -s "https://rgehleqcubtmcwyipyvi.supabase.co/functions/v1/bulk-product-uplo
+ 
+ - **200** = secrets OK  
+ - **503** = set `SHOPIFY_STORE_DOMAIN` and `SHOPIFY_ACCESS_TOKEN` in Supabase → Edge Functions → Secrets (see {{SHOPIFY_SETUP_CHECKLIST}}).
++
++**Full commit/PR flow and Vercel bypass:** [DEPLOY_COMMIT_AND_TEST.md](DEPLOY_COMMIT_AND_TEST.md).
++
++---
++
++## Secrets / headers — Vercel bypass
++
++If your deployment is protected by a Vercel Deployment Protection bypass (e.g., for staging or preview environments), you must configure the following:
++
++- **Header Name:** `x-vercel-protection-bypass`
++- **Secret/Value:** Found in your Vercel project settings under Deployment Protection.
++- **Implementation:** Ensure your crawler or webhook listener includes this header in all outgoing requests to avoid 401 Unauthorized errors.

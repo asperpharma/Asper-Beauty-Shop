@@ -1,0 +1,5 @@
+docs: migrate Vercel bypass instructions to DEPLOYMENT_TEMPLATE.md
+
+- Move bypass header configuration to central deployment docs
+- Standardize naming to "Secrets / headers — Vercel bypass"
+- Clarify header requirements for protected environments

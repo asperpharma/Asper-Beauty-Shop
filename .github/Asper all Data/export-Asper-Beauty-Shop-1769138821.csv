@@ -1,0 +1,2 @@
+login,name,tfa_enabled,tfa_level,tfa_required_by,is_public,role,last_active,saml_name_id,organization_roles_count
+asperpharma,Asper Beauty Shop ,true,secure,,false,Owner,,,0

@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asper Beauty Box - Digital Boutique</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+      /* Specific overrides or components not in the master style.css yet (e.g., Altar) */
+
+      /* The Altar (Brand Slider) - Retained from previous component as it wasn't explicitly in the new CSS but is part of the concept */
+      .altar {
+        padding: 3rem 0;
+        border-bottom: 1px solid var(--gold-glow);
+        overflow: hidden;
+        white-space: nowrap;
+        background-color: var(--cream);
+        position: relative;
+      }
+
+      .altar-track {
+        display: inline-flex;
+        gap: 5rem;
+        animation: slide 30s linear infinite;
+        padding-left: 5rem;
+      }
+
+      .brand-name {
+        font-family: var(--font-sans);
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: var(--burgundy);
+        opacity: 0.7;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+      }
+
+      @keyframes slide {
+        0% {
+          transform: translateX(0);
+        }
+
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav>
+      <div class="logo">
+        ASPER <span>BEAUTY SHOP</span>
+      </div>
+      <div
+        class="menu"
+        style="display: flex; gap: 3rem; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; font-weight: 500"
+      >
+        <!-- Included inline style for menu layout as it was simplified in the provided CSS via 'nav' flex but specific items weren't targeted beyond that -->
+        <span>Skincare</span>
+        <span>Brands</span>
+        <span>The Experience</span>
+        <span>Concierge</span>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="gold-shimmer" id="parallax-shimmer"></div>
+      <!-- Hero content wrapped naturally -->
+      <h1>The Science of Beauty.<br>The Art of Care.</h1>
+      <p>
+        Curating the world’s most prestigious dermatological heritage for
+        Jordan.
+      </p>
+      <button class="btn-primary">
+        Explore the Collection
+      </button>
+    </section>
+
+    <!-- The Altar -->
+    <section class="altar">
+      <div class="altar-track">
+        <span class="brand-name">Vichy</span>
+        <span class="brand-name">La Roche-Posay</span>
+        <span class="brand-name">CeraVe</span>
+        <span class="brand-name">SkinCeuticals</span>
+        <span class="brand-name">Eucerin</span>
+        <span class="brand-name">Bioderma</span>
+        <!-- Duplicate for infinite scroll illusion -->
+        <span class="brand-name">Vichy</span>
+        <span class="brand-name">La Roche-Posay</span>
+        <span class="brand-name">CeraVe</span>
+        <span class="brand-name">SkinCeuticals</span>
+        <span class="brand-name">Eucerin</span>
+        <span class="brand-name">Bioderma</span>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="product-grid">
+      <!-- Product 1 - Elite Tier (Price > 100 JD) -->
+      <div class="product-card" data-price="120">
+        <div class="product-image-wrapper">
+          <div class="product-image-container">
+            <span
+              style="color: var(--gold); font-family: var(--font-serif); font-size: 1.5rem; font-style: italic"
+            >[ Vichy Minéral 89 ]</span>
+          </div>
+          <!-- Ingredient Reveal Overlay -->
+          <div class="ingredient-overlay">
+            <h4 class="overlay-title">Key Ingredients</h4>
+            <div class="gold-divider-small"></div>
+            <ul class="ingredient-list">
+              <li>Volcanic Mineral Water</li>
+              <li>Pure Hyaluronic Acid</li>
+              <li>Glycerin</li>
+            </ul>
+            <!-- Dermatologist's Seal -->
+            <div class="auth-seal" style="width: 80px; text-align: center">
+              <svg
+                viewBox="0 0 100 100"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M30 80C20 70 20 40 30 20M70 80C80 70 80 40 70 20"
+                  stroke="#c5a059"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M45 25H55M50 25V40M40 75H60L55 40H45L40 75Z"
+                  stroke="#c5a059"
+                  stroke-width="2"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M50 15V18M65 20L63 22M35 20L37 22"
+                  stroke="#c5a059"
+                  stroke-width="1"
+                />
+              </svg>
+              <p
+                style="font-family: 'Cormorant Garamond'; color: #c5a059; font-size: 0.6rem; letter-spacing: 1px; text-transform: uppercase; margin-top: 5px"
+              >
+                Clinically Curated
+              </p>
+            </div>
+          </div>
+        </div>
+        <h3 class="product-title">Vichy Minéral 89</h3>
+        <p>Strength & Hydration</p>
+        <div class="product-price">JD 25.00</div>
+        <button class="btn-add-cart" onclick="triggerWaxSeal(this)">
+          Add to Bag
+        </button>
+      </div>
+
+      <!-- Product 2 -->
+      <div class="product-card" data-price="25">
+        <div class="product-image-wrapper">
+          <div class="product-image-container">
+            <span
+              style="color: var(--gold); font-family: var(--font-serif); font-size: 1.5rem; font-style: italic"
+            >[ Hyalu B5 Serum ]</span>
+          </div>
+          <div class="ingredient-overlay">
+            <h4 class="overlay-title">Key Ingredients</h4>
+            <div class="gold-divider-small"></div>
+            <ul class="ingredient-list">
+              <li>Vitamin B5</li>
+              <li>Madecassoside</li>
+              <li>Hyaluronic Acid Duo</li>
+            </ul>
+            <div class="auth-seal" style="width: 80px; text-align: center">
+              <svg
+                viewBox="0 0 100 100"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M30 80C20 70 20 40 30 20M70 80C80 70 80 40 70 20"
+                  stroke="#c5a059"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M45 25H55M50 25V40M40 75H60L55 40H45L40 75Z"
+                  stroke="#c5a059"
+                  stroke-width="2"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M50 15V18M65 20L63 22M35 20L37 22"
+                  stroke="#c5a059"
+                  stroke-width="1"
+                />
+              </svg>
+              <p
+                style="font-family: 'Cormorant Garamond'; color: #c5a059; font-size: 0.6rem; letter-spacing: 1px; text-transform: uppercase; margin-top: 5px"
+              >
+                Clinically Curated
+              </p>
+            </div>
+          </div>
+        </div>
+        <h3 class="product-title">Hyalu B5 Serum</h3>
+        <p>Repairing Plumping</p>
+        <div class="product-price">JD 32.00</div>
+        <button class="btn-add-cart" onclick="triggerWaxSeal(this)">
+          Add to Bag
+        </button>
+      </div>
+
+      <!-- Product 3 -->
+      <div class="product-card">
+        <div class="product-image-wrapper">
+          <div class="product-image-container">
+            <span
+              style="color: var(--gold); font-family: var(--font-serif); font-size: 1.5rem; font-style: italic"
+            >[ C E Ferulic ]</span>
+          </div>
+          <div class="ingredient-overlay">
+            <h4 class="overlay-title">Key Ingredients</h4>
+            <div class="gold-divider-small"></div>
+            <ul class="ingredient-list">
+              <li>15% Pure Vitamin C</li>
+              <li>1% Vitamin E</li>
+              <li>0.5% Ferulic Acid</li>
+            </ul>
+            <div class="auth-seal" style="width: 80px; text-align: center">
+              <svg
+                viewBox="0 0 100 100"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M30 80C20 70 20 40 30 20M70 80C80 70 80 40 70 20"
+                  stroke="#c5a059"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M45 25H55M50 25V40M40 75H60L55 40H45L40 75Z"
+                  stroke="#c5a059"
+                  stroke-width="2"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M50 15V18M65 20L63 22M35 20L37 22"
+                  stroke="#c5a059"
+                  stroke-width="1"
+                />
+              </svg>
+              <p
+                style="font-family: 'Cormorant Garamond'; color: #c5a059; font-size: 0.6rem; letter-spacing: 1px; text-transform: uppercase; margin-top: 5px"
+              >
+                Clinically Curated
+              </p>
+            </div>
+          </div>
+        </div>
+        <h3 class="product-title">C E Ferulic</h3>
+        <p>Antioxidant Treatment</p>
+        <div class="product-price">JD 115.00</div>
+        <button class="btn-add-cart" onclick="triggerWaxSeal(this)">
+          Add to Bag
+        </button>
+      </div>
+    </section>
+
+    <script>
+      // Gold Parallax Shimmer Effect
+      document.addEventListener("mousemove", (e) => {
+        const shimmer = document.getElementById("parallax-shimmer");
+        if (!shimmer) return;
+
+        // Calculate mouse position
+        const x = e.clientX;
+        const y = e.clientY;
+
+        // Move the shimmer slightly
+        shimmer.style.left = `${x}px`;
+        shimmer.style.top = `${y}px`;
+      });
+
+      // "Amman Aura" (Dynamic Lighting)
+      function applyAmmanAura() {
+        const hour = new Date().getHours();
+        const body = document.body;
+
+        // Console log for verification
+        console.log("Current Hour in Amman:", hour);
+
+        if (hour >= 17 && hour <= 19) {
+          // Golden Hour in Jordan
+          body.style.backgroundColor = "#f5eee1"; // A warmer, deeper cream
+          body.style.transition = "background-color 5s ease";
+        } else if (hour >= 20 || hour <= 5) {
+          // Night Elegance
+          body.style.backgroundColor = "#f9f6f0"; // A cooler, moonlight cream
+          body.style.transition = "background-color 5s ease";
+        } else {
+          // Default Day
+          body.style.backgroundColor = "#fdfaf5";
+        }
+      }
+      applyAmmanAura();
+
+      // "Royal Unboxing" Wax Seal Animation
+      // "Royal Unboxing" Wax Seal Animation (Refined)
+      function triggerWaxSeal(btn) {
+        const seal = document.getElementById("wax-seal");
+        if (!seal) {
+          console.error("Seal not found");
+          return;
+        }
+
+        // 1. Reset and Show
+        seal.classList.remove("fade-to-cart");
+        seal.classList.remove("stamping");
+
+        // Trigger reflow
+        void seal.offsetWidth;
+
+        seal.classList.add("stamping");
+        seal.style.opacity = "1";
+
+        // 2. After the 'Stamp' sound/visual, fly it to the cart
+        setTimeout(() => {
+          seal.classList.add("fade-to-cart");
+        }, 1200);
+
+        // 3. Cleanup
+        setTimeout(() => {
+          seal.classList.remove("stamping");
+          seal.style.opacity = "0";
+        }, 1800);
+      }
+
+      // A subtle "Luxury Entrance" for elements
+      const observerOptions = { threshold: 0.1 };
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll(".product-card").forEach((card) => {
+        card.style.opacity = "0";
+        card.style.transform = "translateY(40px)";
+        card.style.transition =
+          "all 0.8s cubic-bezier(0.16, 1, 0.3, 1)"; // More elegant easing
+        observer.observe(card);
+      });
+
+      // Also observe the altar
+      document.querySelectorAll(".altar").forEach((el) => {
+        el.style.opacity = "0";
+        el.style.transition = "opacity 1s ease 0.5s";
+        observer.observe(el);
+      });
+
+      // --- HIGH-VALUE SPARKLE ("Elite Filter") ---
+      const PHI = 1.618; // Asper Golden Ratio
+
+      document.querySelectorAll(".product-card").forEach((card) => {
+        const price = parseFloat(card.getAttribute("data-price"));
+
+        // Only apply to items > 100 JD
+        if (price && price > 100) {
+          card.addEventListener("mousemove", (e) => {
+            createSparkle(e, card, price);
+          });
+        }
+      });
+
+      function createSparkle(e, card, price) {
+        const sparkle = document.createElement("div");
+        sparkle.className = "sparkle-element";
+
+        // Positioning the sparkle at the cursor
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        sparkle.style.left = `${x}px`;
+        sparkle.style.top = `${y}px`;
+
+        // Lustre Intensity Formula: L = ((P - 100) / 100) * PHI
+        // Clamp between 1 and 3 for reasonable scaling
+        const lustre = Math.min(
+          3,
+          Math.max(1, ((price - 100) / 100) * PHI),
+        );
+        sparkle.style.transform = `scale(${lustre})`;
+
+        card.appendChild(sparkle);
+
+        // Remove the sparkle after a short trail to keep it clean
+        setTimeout(() => {
+          sparkle.remove();
+        }, 800);
+      }
+    </script>
+    <!-- The Wax Seal Element -->
+    <div id="wax-seal" class="wax-seal-hidden">
+      <div class="wax-body">
+        <div class="wax-logo">A</div>
+      </div>
+    </div>
+
+    <!-- Asper Guarantee Badge -->
+    <div class="asper-guarantee">
+      Curated in Amman. Authenticity Guaranteed.
+    </div>
+
+    <!-- WhatsApp Concierge Button -->
+    <a
+      href="https://wa.me/962xxxxxxx"
+      class="whatsapp-concierge"
+      target="_blank"
+    >
+      <svg
+        class="whatsapp-icon"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zM12.05 20.21c-1.5 0-2.97-.4-4.25-1.16l-.3-.18-3.11.82.83-3.03-.19-.31a8.19 8.19 0 0 1-1.26-4.44c0-4.52 3.67-8.19 8.19-8.19 2.19 0 4.24.85 5.78 2.4 1.54 1.54 2.4 3.59 2.4 5.78 0 4.51-3.68 8.31-8.19 8.31z"
+        />
+      </svg>
+      Consult with an Asper Specialist
+    </a>
+
+    <!-- Thank You Note Modal -->
+    <div id="thank-you-note" class="thank-you-modal">
+      <div class="thank-you-card">
+        <h2 class="thank-you-title">A Note from Our Curation Team</h2>
+        <div class="gold-divider-small" style="margin: 0 auto 20px auto"></div>
+        <p class="thank-you-message">
+          "Beauty is not just a purchase; it is a ritual of
+          self-preservation."<br><br>
+          We are currently hand-selecting your items from our boutique. Your
+          selection is being prepared with the utmost care. Like a wax-sealed
+          letter, your order represents our commitment to your skin's radiance.
+        </p>
+        <p
+          style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: var(--gold)"
+        >
+          The Asper Promise
+        </p>
+        <div class="hand-signature">Asper Beauty</div>
+        <button
+          class="btn-primary"
+          style="margin-top: 30px"
+          onclick="document.getElementById('thank-you-note').classList.remove('active')"
+        >
+          Continue Exploring
+        </button>
+      </div>
+    </div>
+  </body>
+</html>

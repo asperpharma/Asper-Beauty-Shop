@@ -1,0 +1,66 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:wght@400;600;700&family=Tajawal:wght@400;500;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Clinical Palette (for DNA verification) */
+    --soft-ivory: #f8f8ff;
+    --maroon: #800020;
+    --shiny-gold: #c5a028;
+    --background: 240 33% 98%; /* Soft Ivory #F8F8FF */
+    --foreground: 0 0% 20%; /* Dark Charcoal #333333 */
+    --card: 0 0% 100%; /* Pure White */
+    --card-foreground: 0 0% 20%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 20%;
+    --primary: 345 100% 25%; /* Maroon #800020 */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 240 33% 98%;
+    --secondary-foreground: 345 100% 25%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 46 66% 46%; /* Shiny Gold #C5A028 */
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+  }
+
+  /* Medical Luxury base — see docs/DESIGN_SYSTEM.md */
+  body {
+    @apply bg-soft-ivory text-dark-charcoal font-body antialiased;
+    margin: 0;
+    min-height: 100vh;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading text-maroon;
+  }
+
+  /* RTL Support Helper */
+  [dir="rtl"] body {
+    @apply font-rtl;
+  }
+
+  #root {
+    min-height: 100vh;
+  }
+}

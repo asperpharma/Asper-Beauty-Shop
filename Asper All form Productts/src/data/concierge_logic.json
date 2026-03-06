@@ -1,0 +1,115 @@
+{
+  "concierge_logic": {
+    "version": "1.0",
+    "philosophy": "Pharmacist Logic",
+    "default_currency": "JOD",
+    "flows": {
+      "acne_oil_control": {
+        "trigger_keywords": [
+          "acne",
+          "pimples",
+          "oily",
+          "breakouts",
+          "shiny",
+          "spots"
+        ],
+        "shopify_tag": "Concern_Acne",
+        "pharmacist_message": "For acne-prone skin, we must unclog pores without destroying your moisture barrier. I have selected this medical-grade regimen:",
+        "recommendations": [
+          {
+            "step": "Cleanse",
+            "product_handle": "vichy-normaderm-phytosolution",
+            "why": "Contains Salicylic Acid to deeply purify pores while preserving skin pH."
+          },
+          {
+            "step": "Treat",
+            "product_handle": "lrp-effaclar-duo-plus",
+            "why": "Targeted dual-action treatment to reduce blemishes and prevent recurrence."
+          },
+          {
+            "step": "Protect",
+            "product_handle": "vichy-capital-soleil-mattifying",
+            "why": "Oil-control UV protection is non-negotiable to prevent dark spots."
+          }
+        ]
+      },
+      "anti_aging_wrinkles": {
+        "trigger_keywords": [
+          "wrinkles",
+          "lines",
+          "aging",
+          "sagging",
+          "lift",
+          "old"
+        ],
+        "shopify_tag": "Concern_AntiAging",
+        "pharmacist_message": "To address signs of aging, we focus on fortification and collagen production. Here is your 'Morning Spa' lift:",
+        "recommendations": [
+          {
+            "step": "Fortify",
+            "product_handle": "vichy-mineral-89",
+            "why": "The daily dose of strength. Plumps skin and strengthens the barrier."
+          },
+          {
+            "step": "Correct",
+            "product_handle": "vichy-liftactiv-vitamin-c",
+            "why": "Pure 15% Vitamin C to brighten skin tone and reduce fine lines."
+          },
+          {
+            "step": "Restore",
+            "product_handle": "vichy-liftactiv-collagen-specialist",
+            "why": "Boosts collagen production to firm sagging contours."
+          }
+        ]
+      },
+      "hydration_glow": {
+        "trigger_keywords": [
+          "dry",
+          "dull",
+          "tight",
+          "flaky",
+          "glow",
+          "dehydrated"
+        ],
+        "shopify_tag": "Concern_Dryness",
+        "pharmacist_message": "Your skin is thirsty. We need to lock in moisture for 24 hours using volcanic water minerals.",
+        "recommendations": [
+          {
+            "step": "Boost",
+            "product_handle": "vichy-mineral-89",
+            "why": "The essential first step. Hyaluronic Acid for immediate plumping."
+          },
+          {
+            "step": "Hydrate",
+            "product_handle": "vichy-aqualia-thermal-rich",
+            "why": "Dynamic hydration that distributes water to facial zones that need it most."
+          }
+        ]
+      },
+      "sensitivity_redness": {
+        "trigger_keywords": [
+          "red",
+          "itchy",
+          "sensitive",
+          "rosacea",
+          "burn",
+          "sting"
+        ],
+        "shopify_tag": "Concern_Sensitivity",
+        "pharmacist_message": "For sensitive skin, 'Less is More'. We prioritize 0% fragrance and 0% alcohol formulas.",
+        "recommendations": [
+          {
+            "step": "Cleanse",
+            "product_handle": "lrp-toleriane-dermo-cleanser",
+            "why": "Wipes away impurities without any rubbing or irritation."
+          },
+          {
+            "step": "Soothe",
+            "product_handle": "lrp-toleriane-double-repair",
+            "why": "Restores the microbiome barrier instantly."
+          }
+        ]
+      }
+    }
+  }
+}

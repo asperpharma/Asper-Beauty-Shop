@@ -1,0 +1,27 @@
+{
+  "claudeCodeChat.permissions.yoloMode": false,
+  "geminicodeassist.project": "gen-lang-client-0019655668",
+  "workbench.editorAssociations": {
+    "FIX": "default"
+  },
+  "workbench.editor.autoLockGroups": {
+    "default": true,
+    "workbench.editor.chatSession": true,
+    "workbench.editorinputs.searchEditorInput": true,
+    "notebookOutputEditor": true,
+    "repl": true,
+    "jupyter-notebook": true,
+    "workbench.editors.gettingStartedInput": true,
+    "imagePreview.previewEditor": true,
+    "vscode.videoPreview": true,
+    "vscode.audioPreview": true,
+    "jsProfileVisualizer.heapsnapshot.table": true,
+    "jsProfileVisualizer.heapprofile.table": true,
+    "jsProfileVisualizer.cpuprofile.table": true,
+    "workbench.input.interactive": true,
+    "mainThreadWebview-markdown.preview": true
+  },
+  "workbench.editor.limit.perEditorGroup": true,
+  "workbench.editor.limit.enabled": true,
+  "editor.formatOnSave": true
+}

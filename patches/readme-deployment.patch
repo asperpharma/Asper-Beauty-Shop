@@ -1,0 +1,49 @@
+diff --git a/README.md b/README.md
+index 074ba2f..28ef1c3 100644
+--- a/README.md
++++ b/README.md
+@@ -18,6 +18,43 @@ npm run preview     # Preview production build
+ ```
+ 
+ ---
+ 
++## Deployment
++
++Deployment flow: health checks → fix 503 (set Supabase Edge Function secrets) → Shopify pre-launch → PR → DNS → verify. See [NEXT_STEPS.md](NEXT_STEPS.md) and [SHOPIFY_SETUP_CHECKLIST.md](SHOPIFY_SETUP_CHECKLIST.md).
++
++**Bulk product upload (Edge Function)** — filled in for this project. Replace `{{AUTH_HEADER}}` with your admin JWT or use the `$ADMIN_TOKEN` env-var pattern.
++
++GET (health check, no auth):
++
++```bash
++curl -s "https://rgehleqcubtmcwyipyvi.supabase.co/functions/v1/bulk-product-upload"
++```
++
++200 = secrets OK; 503 = set SHOPIFY_STORE_DOMAIN and SHOPIFY_ACCESS_TOKEN in Supabase → Edge Functions → Secrets.
++
++POST (admin JWT required):
++
++```bash
++curl -X POST "https://rgehleqcubtmcwyipyvi.supabase.co/functions/v1/bulk-product-upload" \
++  -H "Authorization: Bearer {{AUTH_HEADER}}" \
++  -H "Content-Type: application/json" \
++  -d '{"action":"create-shopify-product","product":{"title":"Test","price":"0.00","sku":"test","body":"","vendor":"","product_type":"","tags":""}}'
++```
++
++Or with env var:
++
++```bash
++export ADMIN_TOKEN="your-admin-jwt-here"
++curl -X POST "https://rgehleqcubtmcwyipyvi.supabase.co/functions/v1/bulk-product-upload" \
++  -H "Authorization: Bearer $ADMIN_TOKEN" \
++  -H "Content-Type: application/json" \
++  -d '{"action":"create-shopify-product","product":{"title":"Test","price":"0.00","sku":"test","body":"","vendor":"","product_type":"","tags":""}}'
++```
++
++More: [docs/DEPLOYMENT_TEMPLATE.md](docs/DEPLOYMENT_TEMPLATE.md).
++
++---
++
+ ## ✨ Features
+ 
+ - 🛍️ **Shopify Integration** - Full e-commerce with checkout

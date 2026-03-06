@@ -1,0 +1,35 @@
+section,element_type,field,value_en,value_ar,asset_path,notes
+Hero,headline,main_title,Discover Your Ritual,,/hero-banner.png (fallback),Primary headline above video
+Hero,subheadline,subtitle,"Curated luxury skincare & beauty from the world's most prestigious brands",,,Below headline
+Hero,video,primary_media,,,/hero-video.mp4,Main hero video (autoPlay muted loop)
+Hero,image,fallback_image,,,/hero-banner.png,Shown while video loads
+Hero,label,video_label,The Asper Experience,,,Badge below video
+Hero,cta,primary_button,Shop Collection,,,Primary CTA - gold gradient
+Hero,cta,secondary_button,Explore Brands,,,Outline CTA
+Hero,tagline,footer_tagline,Eternal Elegance,,,Small text at bottom of hero
+Hero,scroll_indicator,,Scroll,,,Bounce indicator at bottom
+Hero,trust_badge,badges,"100% Authentic | JFDA Certified | Same-Day Delivery | Premium Selection | Award Winning","أصلي 100% | معتمد من JFDA | توصيل في نفس اليوم | اختيار فاخر | حائز على جوائز",,Rotating badge above headline
+Landing,section,Brand Story,The Art of Celestial Rituals,فن الطقوس السماوية,@/assets/asper-logo-new.jpg,Maroon section with logo
+Landing,brand_story,body_copy,"At Asper Beauty we believe beauty is a ritual not a routine. Inspired by the resilience of the lotus and the timeless elegance of gold we created a sanctuary for your skin.",في أسبر بيوتي نؤمن بأن الجمال طقس وليس روتين. مستوحاة من صمود زهرة اللوتس وأناقة الذهب الخالدة أنشأنا ملاذاً لبشرتك.,,
+Landing,brand_story,features,"100% Organic Botanicals | Cruelty-Free & Ethical | Dermatologist Tested",مكونات عضوية 100% | خالٍ من القسوة وأخلاقي | مُختبر من أطباء الجلدية,,
+Landing,section,Featured Collection,The Collection,المجموعة,,Glass gold product cards
+Landing,featured_collection,subtitle,Curated for Radiance,منتقاة للإشراق,,Section header
+Landing,section,Trust Banner,,,burgundy/gold gradient,Three advantage cards
+Landing,trust_banner,advantage_1_title,Guaranteed Authentic,أصالة مضمونة,shield,
+Landing,trust_banner,advantage_1_desc,We compete against fakes,نحارب المنتجات المقلدة,,
+Landing,trust_banner,advantage_2_title,Pharmacist Verified,معتمد من الصيدلي,stethoscope,
+Landing,trust_banner,advantage_2_desc,We are experts,خبراء متخصصون,,
+Landing,trust_banner,advantage_3_title,Amman Concierge Delivery,توصيل سريع في عمّان,truck,
+Landing,trust_banner,advantage_3_desc,We are fast,سرعة فائقة,,
+Landing,section,Newsletter,Stay Connected,ابقي على تواصل,,Email signup
+Landing,newsletter,subscribe_text,Subscribe to receive exclusive offers and updates.,اشترك لتلقي العروض الحصرية والتحديثات.,,
+Landing,newsletter,placeholder,Your email,بريدك الإلكتروني,,
+Landing,newsletter,button,Subscribe,اشترك,,
+LanguageContext,hero,heroTitle,Unbox Pure Indulgence,افتح صندوق الفخامة,,Alternate hero title (may not be in use)
+LanguageContext,hero,heroSubtitle,"Discover our curated collection of premium beauty boxes crafted with the finest ingredients for discerning individuals.","اكتشف مجموعتنا المختارة من صناديق التجميل الفاخرة المصنوعة بأجود المكونات للأفراد المميزين.",,
+LanguageContext,hero,discoverCollections,Discover Collections,اكتشف المجموعات,,
+Colors,theme,primary_gold,#D4AF37,,,Gold accent
+Colors,theme,charcoal,#333333 (asper-charcoal),,,Text
+Colors,theme,merlot,#800020 (asper-merlot),,,Brand story bg
+Colors,theme,ivory,#F8F8FF (asper-ivory),,,Light bg
+Colors,theme,cream,cream/cream-dark,,,Backgrounds

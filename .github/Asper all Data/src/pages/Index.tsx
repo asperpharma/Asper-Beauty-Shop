@@ -1,0 +1,114 @@
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Header } from "@/components/Header";
+import AnimatedShaderHero from "@/components/ui/animated-shader-hero";
+import { ShopByCategory } from "@/components/ShopByCategory";
+import { FeaturedProductsByCategory } from "@/components/FeaturedProductsByCategory";
+import { NewArrivals } from "@/components/NewArrivals";
+import { TrendingProducts } from "@/components/TrendingProducts";
+import { FeaturedDeals } from "@/components/FeaturedDeals";
+import { AmmanEdit } from "@/components/AmmanEdit";
+import { FeaturedBrands } from "@/components/FeaturedBrands";
+import { Testimonials } from "@/components/Testimonials";
+import { InstagramFeed } from "@/components/InstagramFeed";
+import { Newsletter } from "@/components/Newsletter";
+import { TrustBanner } from "@/components/TrustBanner";
+import { Footer } from "@/components/Footer";
+import { BeautyAssistant } from "@/components/BeautyAssistant";
+import { ScrollToTop } from "@/components/ScrollToTop";
+import { FloatingSocials } from "@/components/FloatingSocials";
+import { PageLoadingSkeleton } from "@/components/PageLoadingSkeleton";
+
+const Index = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleLoad = () => setIsLoading(false);
+
+    // Hide skeleton once window loads or timeout finishes (whichever comes last for safety)
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1200);
+
+    window.addEventListener("load", handleLoad);
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("load", handleLoad);
+    };
+  }, []);
+
+  if (isLoading) {
+    return <PageLoadingSkeleton />;
+  }
+
+  return (
+    <div className="min-h-screen bg-cream animate-fade-in luxury-texture">
+      <Header />
+      <main>
+        {/* Hero Section */}
+        <AnimatedShaderHero
+          trustBadge={{
+            text: "Trusted by 50,000+ Beauty Enthusiasts",
+            icons: ["✨", "💎", "🌟"],
+          }}
+          headline={{
+            line1: "Discover Luxury",
+            line2: "Beauty & Skincare",
+          }}
+          subtitle="Curated collections of premium beauty products from the world's most prestigious brands. Experience the art of self-care."
+          buttons={{
+            primary: {
+              text: "Explore Collections",
+              onClick: () => navigate("/collections"),
+            },
+            secondary: {
+              text: "Shop Best Sellers",
+              onClick: () => navigate("/best-sellers"),
+            },
+          }}
+        />
+
+        {/* Shop by Category - Organized navigation like Ulta/Cult Beauty */}
+        <ShopByCategory />
+
+        {/* Featured Products by Category - Organized sections with category headers */}
+        <FeaturedProductsByCategory />
+
+        {/* Featured Deals Section - Sale products highlighted separately */}
+        <FeaturedDeals />
+
+        {/* New Arrivals Section */}
+        <NewArrivals />
+
+        {/* Trending Products Section */}
+        <TrendingProducts />
+
+        {/* The Amman Edit - Curated Selection */}
+        <AmmanEdit />
+
+        {/* Featured Brands */}
+        <FeaturedBrands />
+
+        {/* Testimonials */}
+        <Testimonials />
+
+        {/* Instagram Feed */}
+        <InstagramFeed />
+
+        {/* Newsletter */}
+        <Newsletter />
+
+        {/* Trust Banner */}
+        <TrustBanner />
+      </main>
+      <Footer />
+      <BeautyAssistant />
+      <ScrollToTop />
+      <FloatingSocials />
+    </div>
+  );
+};
+
+export default Index;

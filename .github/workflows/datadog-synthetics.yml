@@ -1,0 +1,34 @@
+# Run Datadog Synthetic tests in CI.
+# Requires repository secrets: DD_API_KEY, DD_APP_KEY (or DATADOG_API_KEY, DATADOG_APP_KEY).
+# See: https://github.com/DataDog/synthetics-ci-github-action
+
+name: Datadog Synthetics
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  synthetics:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run Datadog Synthetics tests
+        uses: DataDog/synthetics-ci-github-action@v3.8.2
+        with:
+        # Optional: uncomment and set to run specific tests
+        # publicIds: 'your-public-id'
+        # configPath: './synthetics-config.json'
+        # search: 'tag:e2e,env:prod'
+        # files: '.synthetics/**/*.json'
+        env:
+          DD_API_KEY: ${{ secrets.DD_API_KEY }}
+          DD_APP_KEY: ${{ secrets.DD_APP_KEY }}

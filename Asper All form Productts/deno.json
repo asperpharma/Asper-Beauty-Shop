@@ -1,0 +1,5 @@
+{
+  "fmt": {
+    "exclude": ["Supabase_files", "node_modules", "Orgnized Products", ".git"]
+  }
+}
