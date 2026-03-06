@@ -1,4 +1,4 @@
-﻿import { lazy, Suspense, useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Header } from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
@@ -35,7 +35,7 @@ const FloatingSocials = lazy(() =>
 
 // Lightweight skeleton for lazy sections
 const SectionSkeleton = ({ height = "h-64" }: { height?: string }) => (
-  <div className={\ bg-cream animate-pulse}>
+  <div className={`${height} bg-cream animate-pulse`}>
     <div className="luxury-container py-12">
       <Skeleton className="h-8 w-48 mx-auto mb-8" />
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">

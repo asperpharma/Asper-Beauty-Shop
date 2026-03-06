@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { Button } from '@/components/ui/button';
 import { MessageCircle, Instagram, Send, Sparkles, ShieldCheck } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -19,7 +19,7 @@ const SocialBeautyExpert = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           
           {/* Left Side: Content */}
-          <div className={space-y-8 \} dir={isAr ? 'rtl' : 'ltr'}>
+          <div className={`space-y-8 ${isAr ? 'text-right' : 'text-left'}`} dir={isAr ? 'rtl' : 'ltr'}>
             <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/30 text-[#D4AF37] font-sans text-sm tracking-wide animate-fade-in">
               <Sparkles className="w-4 h-4 me-2" />
               <span>{isAr ? 'Ø®Ø¨ÙŠØ± Ø§Ù„Ø¬Ù…Ø§Ù„ Ø§Ù„Ø°ÙƒÙŠ' : 'AI Beauty Expert'}</span>
@@ -107,7 +107,7 @@ const SocialBeautyExpert = () => {
       </div>
 
       <style>
-        {
+        {`
         @keyframes float {
           0%, 100% { transform: translateY(0px); }
           50% { transform: translateY(-20px); }
@@ -115,7 +115,7 @@ const SocialBeautyExpert = () => {
         .animate-float {
           animation: float 6s ease-in-out infinite;
         }
-        }
+        `}
       </style>
     </section>
   );
